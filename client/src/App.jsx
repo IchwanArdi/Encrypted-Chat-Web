@@ -1,4 +1,4 @@
-import Index from './pages';
+import Index from './pages/Index';
 import Navbar from './components/Navbar';
 
 function App() {
