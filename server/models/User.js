@@ -1,22 +1,19 @@
+const mongoose = require('mongoose');
+
 const userSchema = new mongoose.Schema({
-  // Core Identity
-  id: { type: String, unique: true }, // internal ID
   email: { type: String, unique: true, sparse: true },
 
-  // Profile
   profile: {
     firstName: String,
     lastName: String,
-    displayName: String, // fallback name
+    displayName: String,
     avatar: String,
-    bio: String,
   },
 
-  // Authentication Methods
   auth: {
     local: {
       email: String,
-      password: String, // bcrypt hashed
+      password: String, // hashed
       isEmailVerified: { type: Boolean, default: false },
     },
 
@@ -35,20 +32,11 @@ const userSchema = new mongoose.Schema({
     },
   },
 
-  // Account Meta
-  settings: {
-    language: { type: String, default: 'en' },
-    theme: { type: String, default: 'light' },
-    notifications: { type: Boolean, default: true },
-  },
+  authMethods: [{ type: String, enum: ['email', 'google', 'facebook'] }],
 
-  // Security
+  isActive: { type: Boolean, default: true },
   lastLoginAt: Date,
-  lastLoginIP: String,
-  loginAttempts: { type: Number, default: 0 },
-  lockUntil: Date,
-
-  // Timestamps
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
 });
+
+module.exports = mongoose.model('User', userSchema);
