@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { User, ChevronDown } from 'lucide-react';
 import logo from '../assets/logo.webp';
 
@@ -53,15 +54,19 @@ function Navbar() {
     >
       <div className="flex items-center justify-between">
         {/* Logo placeholder */}
-        <img src={logo} alt="Logo" className="h-12 md:h-15 object-cover" />
+        <Link to="/">
+          <img src={logo} alt="Logo" className="h-12 md:h-15 object-cover" />
+        </Link>
 
         {/* Desktop Navigation - hanya tampil di desktop */}
         <div className="hidden md:flex gap-x-6 items-center">
-          <button className="text-lg font-semibold text-black hover:text-blue-500 transition-all duration-200 cursor-pointer relative group">
+          <Link to="/login" className="text-lg font-semibold text-black hover:text-blue-500 transition-all duration-200 cursor-pointer relative group">
             Login
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-200 group-hover:w-full"></span>
-          </button>
-          <button className="text-lg font-semibold items-center py-2 px-8 rounded-2xl bg-black text-white hover:bg-gray-800 transform transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl">Signup</button>
+          </Link>
+          <Link to="/register" className="text-lg font-semibold items-center py-2 px-8 rounded-2xl bg-black text-white hover:bg-gray-800 transform transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl">
+            Signup
+          </Link>
         </div>
 
         {/* Mobile User Button - hanya tampil di mobile */}
@@ -105,7 +110,9 @@ function Navbar() {
               `}
                 style={{ animationDelay: '50ms' }}
               >
-                <span className="relative z-10">Login</span>
+                <Link to="/login" className="relative z-10">
+                  Login
+                </Link>
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-top"></div>
               </button>
 
@@ -115,7 +122,9 @@ function Navbar() {
               `}
                 style={{ animationDelay: '100ms' }}
               >
-                <span className="relative z-10">Signup</span>
+                <Link to="/register" className="relative z-10">
+                  Signup
+                </Link>
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-top"></div>
               </button>
             </div>
@@ -127,7 +136,7 @@ function Navbar() {
       </div>
 
       {/* Custom CSS for animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
