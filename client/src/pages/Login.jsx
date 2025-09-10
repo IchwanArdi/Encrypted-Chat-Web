@@ -6,7 +6,6 @@ function Login() {
     email: '',
     password: '',
   });
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -21,18 +20,51 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulasi loading
-    setTimeout(() => {
-      console.log('Login data:', formData);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Store token
+        localStorage.setItem('token', data.token);
+        // Redirect to dashboard
+        window.location.href = '/dashboard';
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed. Please try again.');
+    } finally {
       setIsLoading(false);
-    }, 2000);
+    }
+  };
+
+  // Social Login Handlers
+  const handleGoogleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`;
+  };
+
+  const handleFacebookLogin = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/facebook`;
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="md:min-w-lg w-full space-y-8">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
+          <div className="mx-auto h-12 w-12 rounded-xl bg-slate-900 flex items-center justify-center mb-8 shadow-lg">
+            <div className="text-white text-xl font-bold">G</div>
+          </div>
           <h1 className="text-3xl font-light text-slate-900 mb-2 tracking-tight">Welcome Back</h1>
           <p className="text-slate-500 text-sm font-light">Sign in to continue to Guyu Chat</p>
         </div>
@@ -40,7 +72,6 @@ function Login() {
         {/* Login Form */}
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Email Input */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
                 Email Address
@@ -57,52 +88,20 @@ function Login() {
               />
             </div>
 
-            {/* Password Input */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
                 Password
               </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  className="w-full px-3 py-2.5 border border-slate-300 rounded-md focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors duration-200 text-slate-900 placeholder-slate-400 bg-white pr-10"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)}>
-                  <svg className="h-4 w-4 text-slate-400 hover:text-slate-600 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    {showPassword ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
-                      />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    )}
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 text-slate-900 focus:ring-slate-900 border-slate-300 rounded" />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-600 font-light">
-                  Remember me
-                </label>
-              </div>
-              <div className="text-sm">
-                <Link to="/forgot-password" className="font-light text-slate-600 hover:text-slate-900 transition-colors duration-200">
-                  Forgot password?
-                </Link>
-              </div>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className="w-full px-3 py-2.5 border border-slate-300 rounded-md focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors duration-200 text-slate-900 placeholder-slate-400 bg-white"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
             </div>
 
             {/* Submit Button */}
@@ -114,18 +113,11 @@ function Login() {
                   isLoading ? 'opacity-75 cursor-not-allowed' : ''
                 }`}
               >
-                {isLoading ? (
-                  <div className="flex items-center">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Signing in...
-                  </div>
-                ) : (
-                  'Sign In'
-                )}
+                {isLoading ? 'Signing in...' : 'Sign In'}
               </button>
             </div>
 
-            {/* Divider */}
+            {/* Social Login */}
             <div className="relative py-4">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-slate-200"></div>
@@ -135,10 +127,10 @@ function Login() {
               </div>
             </div>
 
-            {/* Social Login */}
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
+                onClick={handleGoogleLogin}
                 className="w-full inline-flex justify-center py-2.5 px-4 rounded-md border border-slate-300 bg-white text-sm font-light text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200"
               >
                 <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
@@ -151,6 +143,7 @@ function Login() {
               </button>
               <button
                 type="button"
+                onClick={handleFacebookLogin}
                 className="w-full inline-flex justify-center py-2.5 px-4 rounded-md border border-slate-300 bg-white text-sm font-light text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200"
               >
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -160,16 +153,6 @@ function Login() {
               </button>
             </div>
           </form>
-        </div>
-
-        {/* Register Link */}
-        <div className="text-center">
-          <p className="text-sm text-slate-500 font-light">
-            Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-slate-900 hover:text-slate-700 transition-colors duration-200">
-              Create one
-            </Link>
-          </p>
         </div>
       </div>
     </div>
