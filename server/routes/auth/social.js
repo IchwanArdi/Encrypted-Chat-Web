@@ -109,7 +109,7 @@ router.get(
       const token = generateToken(user._id);
 
       // Redirect ke frontend dengan token
-      const frontendURL = process.env.NODE_ENV === 'production' ? 'https://guyuchat.vercel.app' : 'http://localhost:3000';
+      const frontendURL = process.env.NODE_ENV === 'production' ? 'https://guyuchat.vercel.app' : 'http://localhost:5173';
 
       // Redirect dengan token di URL atau set cookie
       res.redirect(`${frontendURL}/auth/success?token=${token}`);
@@ -153,7 +153,7 @@ router.get(
       const token = generateToken(user._id);
 
       // Redirect ke frontend dengan token
-      const frontendURL = process.env.NODE_ENV === 'production' ? 'https://guyuchat.vercel.app' : 'http://localhost:3000';
+      const frontendURL = process.env.NODE_ENV === 'production' ? 'https://guyuchat.vercel.app' : 'http://localhost:5173';
 
       res.redirect(`${frontendURL}/auth/success?token=${token}`);
     } catch (error) {

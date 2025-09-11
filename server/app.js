@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // Untuk form data
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://guyuchat.vercel.app'],
+    origin: ['http://localhost:5173', 'https://guyuchat.vercel.app'],
     credentials: true,
   })
 );
