@@ -75,4 +75,4 @@ app.get('/', (req, res) => {
 });
 
 // Export untuk Vercel serverless
-module.exports.default = app;
+module.exports = app;

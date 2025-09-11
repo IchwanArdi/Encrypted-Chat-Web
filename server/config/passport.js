@@ -1,10 +1,11 @@
-// config/passport.js - Fixed
+// ======== PASSPORT CONFIGURATION ========
+// config/passport.js
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/User');
 
-// Helper function
+// Helper function (same as above)
 const findOrCreateUser = async (profile, provider) => {
   try {
     let user = await User.findOne({ [`auth.${provider}.id`]: profile.id });
@@ -64,14 +65,13 @@ const findOrCreateUser = async (profile, provider) => {
   }
 };
 
-// Google Strategy - FIXED CALLBACK URL
+// Google Strategy
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      // IMPORTANT: Use absolute URL for production
-      callbackURL: process.env.NODE_ENV === 'production' ? 'https://server-chat-web.vercel.app/api/auth/google/callback' : 'http://localhost:5173/api/auth/google/callback',
+      callbackURL: '/api/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -84,14 +84,13 @@ passport.use(
   )
 );
 
-// Facebook Strategy - FIXED CALLBACK URL
+// Facebook Strategy
 passport.use(
   new FacebookStrategy(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      // IMPORTANT: Use absolute URL for production
-      callbackURL: process.env.NODE_ENV === 'production' ? 'https://server-chat-web.vercel.app/api/auth/facebook/callback' : 'http://localhost:5173/api/auth/facebook/callback',
+      callbackURL: '/api/auth/facebook/callback',
       profileFields: ['id', 'displayName', 'name', 'emails', 'photos'],
     },
     async (accessToken, refreshToken, profile, done) => {
