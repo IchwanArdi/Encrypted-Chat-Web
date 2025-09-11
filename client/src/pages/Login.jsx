@@ -58,13 +58,10 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="md:min-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
-          <div className="mx-auto h-12 w-12 rounded-xl bg-slate-900 flex items-center justify-center mb-8 shadow-lg">
-            <div className="text-white text-xl font-bold">G</div>
-          </div>
           <h1 className="text-3xl font-light text-slate-900 mb-2 tracking-tight">Welcome Back</h1>
           <p className="text-slate-500 text-sm font-light">Sign in to continue to Guyu Chat</p>
         </div>
@@ -153,6 +150,16 @@ function Login() {
               </button>
             </div>
           </form>
+        </div>
+
+        {/* Login Link */}
+        <div className="text-center">
+          <p className="text-sm text-slate-500 font-light">
+            Don't have an account?{' '}
+            <Link to="/register" className="font-medium text-slate-900 hover:text-slate-700 transition-colors duration-200">
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
     </div>

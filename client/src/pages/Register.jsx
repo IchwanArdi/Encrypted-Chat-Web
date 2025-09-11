@@ -45,8 +45,8 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+      <div className="md:min-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
           <h1 className="text-3xl font-light text-slate-900 mb-2 tracking-tight">Create Account</h1>

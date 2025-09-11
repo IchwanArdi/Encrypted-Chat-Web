@@ -1,17 +1,18 @@
-// App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
 import Index from './pages/Index';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import AuthSuccess from './pages/AuthSuccess';
+import ChatPage from './pages/ChatPage';
+import AuthSuccess from './components/AuthSuccess';
+import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Existing routes */}
+        {/* Landing Page */}
         <Route
           path="/"
           element={
@@ -20,6 +21,8 @@ function App() {
             </MainLayout>
           }
         />
+
+        {/* Auth Pages */}
         <Route
           path="/login"
           element={
@@ -37,19 +40,33 @@ function App() {
           }
         />
 
-        {/* New auth success route */}
+        {/* OAuth Success Handler */}
         <Route path="/auth/success" element={<AuthSuccess />} />
 
-        {/* Optional: Auth error route */}
+        {/* Protected Chat Page */}
         <Route
-          path="/auth/error"
+          path="/chat"
           element={
-            <AuthLayout>
-              <div className="text-center">
-                <h2 className="text-2xl font-light text-red-600 mb-4">Authentication Error</h2>
-                <p className="text-slate-600">Something went wrong. Please try again.</p>
+            <ProtectedRoute>
+              <AuthLayout>
+                <ChatPage />
+              </AuthLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 404 Page */}
+        <Route
+          path="*"
+          element={
+            <MainLayout>
+              <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+                <div className="text-center">
+                  <h1 className="text-4xl font-bold text-slate-900">404</h1>
+                  <p className="text-slate-600 mt-2">Page not found</p>
+                </div>
               </div>
-            </AuthLayout>
+            </MainLayout>
           }
         />
       </Routes>
