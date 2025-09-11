@@ -1,4 +1,4 @@
-// app.js - Updated
+// app.js - Updated and Fixed
 const express = require('express');
 const connectDB = require('./config/db');
 const session = require('express-session');
@@ -18,7 +18,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // Untuk form data
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
@@ -54,17 +54,24 @@ app.use(passport.session());
 // Routes
 app.use('/api/auth', require('./routes/auth/login'));
 app.use('/api/auth', require('./routes/auth/register'));
-app.use('/api/auth', require('./routes/auth/social')); // Add social routes
+app.use('/api/auth', require('./routes/auth/social'));
 app.use('/api/auth', require('./routes/auth/logout'));
+app.use('/api/auth', require('./routes/auth/verify')); // ADD THIS LINE - Missing verify route
 
 // Route Untuk mendapatkan data user yang sudah login
 app.use('/api/data', require('./routes/api/dataUser'));
 
-// app.use('/api/auth', require('./routes/auth/register'));
-
 // Test route
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working!' });
+});
+
+// Root route untuk testing
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Server is running!',
+    environment: process.env.NODE_ENV || 'development',
+  });
 });
 
 // Export untuk Vercel serverless
