@@ -67,4 +67,5 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working!' });
 });
 
-module.exports = app;
+// Export untuk Vercel serverless
+module.exports.default = app;
