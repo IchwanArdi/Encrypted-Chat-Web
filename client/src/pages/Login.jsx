@@ -35,8 +35,8 @@ function Login() {
       if (data.success) {
         // Store token
         localStorage.setItem('token', data.token);
-        // Redirect to dashboard
-        window.location.href = '/dashboard';
+        // Redirect to chat
+        window.location.href = '/chat';
       } else {
         alert(data.message);
       }
@@ -55,6 +55,30 @@ function Login() {
 
   const handleFacebookLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/facebook`;
+  };
+
+  const handleEmailLogin = async (formData) => {
+    // This function can be used to switch to email login if needed
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (data.success) {
+        localStorage.setItem('token', data.token);
+        window.location.href = '/chat';
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed. Please try again.');
+    }
   };
 
   return (
@@ -105,6 +129,7 @@ function Login() {
             <div className="pt-2">
               <button
                 type="submit"
+                onClick={() => handleEmailLogin(formData)}
                 disabled={isLoading}
                 className={`w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-all duration-200 ${
                   isLoading ? 'opacity-75 cursor-not-allowed' : ''

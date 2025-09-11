@@ -19,7 +19,7 @@ function FadeUp({ children, delay = 0 }) {
   );
 }
 
-function Index() {
+function IndexPage() {
   useEffect(() => {
     AOS.init({
       duration: 700, // durasi animasi
@@ -122,4 +122,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default IndexPage;

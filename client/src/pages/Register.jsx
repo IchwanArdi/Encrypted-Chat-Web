@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,6 +14,8 @@ function Register() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,28 +23,109 @@ function Register() {
       ...prev,
       [name]: value,
     }));
+    // Clear error when user starts typing
+    if (error) setError('');
+  };
+
+  const validateForm = () => {
+    if (!formData.firstName.trim()) {
+      setError('First name is required');
+      return false;
+    }
+    if (!formData.lastName.trim()) {
+      setError('Last name is required');
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setError('Email is required');
+      return false;
+    }
+    if (!formData.password) {
+      setError('Password is required');
+      return false;
+    }
+    if (formData.password.length < 3) {
+      setError('Password must be at least 3 characters long');
+      return false;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return false;
+    }
+    if (!agreedToTerms) {
+      setError('Please agree to the terms and conditions');
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
 
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
-
-    if (!agreedToTerms) {
-      alert('Please agree to the terms and conditions');
+    if (!validateForm()) {
       return;
     }
 
     setIsLoading(true);
 
-    // Simulasi loading
-    setTimeout(() => {
-      console.log('Register data:', formData);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim().toLowerCase(),
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess('Registration successful! Redirecting to login...');
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
+        setAgreedToTerms(false);
+
+        // Redirect to login page after 2 seconds
+        setTimeout(() => {
+          navigate('/login', {
+            state: {
+              message: 'Registration successful! Please log in with your credentials.',
+              email: formData.email.trim().toLowerCase(),
+            },
+          });
+        }, 2000);
+      } else {
+        setError(data.message || 'Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setError('Network error. Please check your connection and try again.');
+    } finally {
       setIsLoading(false);
-    }, 2000);
+    }
+  };
+
+  // Social Login Handlers
+  const handleGoogleRegister = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`;
+  };
+
+  const handleFacebookRegister = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/facebook`;
   };
 
   return (
@@ -55,6 +139,19 @@ function Register() {
 
         {/* Register Form */}
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-8">
+          {/* Error/Success Messages */}
+          {error && (
+            <div className="mb-4 p-3 rounded-md bg-red-50 border border-red-200">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
+
+          {success && (
+            <div className="mb-4 p-3 rounded-md bg-green-50 border border-green-200">
+              <p className="text-sm text-green-600">{success}</p>
+            </div>
+          )}
+
           <form className="space-y-5" onSubmit={handleSubmit}>
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
@@ -71,6 +168,7 @@ function Register() {
                   placeholder="John"
                   value={formData.firstName}
                   onChange={handleInputChange}
+                  disabled={isLoading}
                 />
               </div>
               <div>
@@ -86,6 +184,7 @@ function Register() {
                   placeholder="Doe"
                   value={formData.lastName}
                   onChange={handleInputChange}
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -104,6 +203,7 @@ function Register() {
                 placeholder="john.doe@example.com"
                 value={formData.email}
                 onChange={handleInputChange}
+                disabled={isLoading}
               />
             </div>
 
@@ -122,8 +222,9 @@ function Register() {
                   placeholder="Create a strong password"
                   value={formData.password}
                   onChange={handleInputChange}
+                  disabled={isLoading}
                 />
-                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)}>
+                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)} disabled={isLoading}>
                   <svg className="h-4 w-4 text-slate-400 hover:text-slate-600 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     {showPassword ? (
                       <path
@@ -138,6 +239,7 @@ function Register() {
                   </svg>
                 </button>
               </div>
+              <p className="mt-1 text-xs text-slate-500">Minimum 3 characters</p>
             </div>
 
             {/* Confirm Password Input */}
@@ -155,8 +257,9 @@ function Register() {
                   placeholder="Confirm your password"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
+                  disabled={isLoading}
                 />
-                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowConfirmPassword(!showConfirmPassword)} disabled={isLoading}>
                   <svg className="h-4 w-4 text-slate-400 hover:text-slate-600 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     {showConfirmPassword ? (
                       <path
@@ -175,7 +278,15 @@ function Register() {
 
             {/* Terms Agreement */}
             <div className="flex items-start">
-              <input id="terms" name="terms" type="checkbox" checked={agreedToTerms} onChange={(e) => setAgreedToTerms(e.target.checked)} className="h-4 w-4 text-slate-900 focus:ring-slate-900 border-slate-300 rounded mt-0.5" />
+              <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                className="h-4 w-4 text-slate-900 focus:ring-slate-900 border-slate-300 rounded mt-0.5"
+                disabled={isLoading}
+              />
               <label htmlFor="terms" className="ml-2 block text-sm text-slate-600 font-light">
                 I agree to the{' '}
                 <Link to="/terms" className="text-slate-900 hover:text-slate-700 transition-colors duration-200">
@@ -222,7 +333,9 @@ function Register() {
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className="w-full inline-flex justify-center py-2.5 px-4 rounded-md border border-slate-300 bg-white text-sm font-light text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200"
+                onClick={handleGoogleRegister}
+                disabled={isLoading}
+                className="w-full inline-flex justify-center py-2.5 px-4 rounded-md border border-slate-300 bg-white text-sm font-light text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
                   <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -234,7 +347,9 @@ function Register() {
               </button>
               <button
                 type="button"
-                className="w-full inline-flex justify-center py-2.5 px-4 rounded-md border border-slate-300 bg-white text-sm font-light text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200"
+                onClick={handleFacebookRegister}
+                disabled={isLoading}
+                className="w-full inline-flex justify-center py-2.5 px-4 rounded-md border border-slate-300 bg-white text-sm font-light text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

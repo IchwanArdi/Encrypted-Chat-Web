@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
-import Index from './pages/Index';
+import IndexPage from './pages/IndexPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import ChatPage from './pages/ChatPage';
+import DashboardChatPage from './pages/DashboardChatPage';
 import AuthSuccess from './components/AuthSuccess';
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 
@@ -17,7 +17,7 @@ function App() {
           path="/"
           element={
             <MainLayout>
-              <Index />
+              <IndexPage />
             </MainLayout>
           }
         />
@@ -49,7 +49,7 @@ function App() {
           element={
             <ProtectedRoute>
               <AuthLayout>
-                <ChatPage />
+                <DashboardChatPage />
               </AuthLayout>
             </ProtectedRoute>
           }
