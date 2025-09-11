@@ -53,7 +53,12 @@ app.use(passport.session());
 
 // Routes
 app.use('/api/auth', require('./routes/auth/login'));
+app.use('/api/auth', require('./routes/auth/register'));
 app.use('/api/auth', require('./routes/auth/social')); // Add social routes
+app.use('/api/auth', require('./routes/auth/logout'));
+
+// Route Untuk mendapatkan data user yang sudah login
+app.use('/api/data', require('./routes/api/dataUser'));
 
 // app.use('/api/auth', require('./routes/auth/register'));
 
