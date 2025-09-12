@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import DashboardChatPage from './pages/DashboardChatPage';
+import AccountDeletionForm from './pages/AccountDeletionForm';
 import AuthSuccess from './components/AuthSuccess';
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 
@@ -54,6 +55,14 @@ function App() {
           element={
             <AuthLayout>
               <TermsOfService />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/account-deletion-form"
+          element={
+            <AuthLayout>
+              <AccountDeletionForm />
             </AuthLayout>
           }
         />
