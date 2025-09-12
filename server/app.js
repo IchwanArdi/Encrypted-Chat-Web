@@ -54,12 +54,14 @@ app.use(passport.session());
 // Routes
 app.use('/api/auth', require('./routes/auth/login'));
 app.use('/api/auth', require('./routes/auth/register'));
+
 app.use('/api/auth', require('./routes/auth/social'));
 app.use('/api/auth', require('./routes/auth/logout'));
-app.use('/api/auth', require('./routes/auth/verify')); // ADD THIS LINE - Missing verify route
+app.use('/api/auth', require('./routes/auth/verify'));
 
 // Route Untuk mendapatkan data user yang sudah login
 app.use('/api/data', require('./routes/api/dataUser'));
+app.use('/api/data', require('./routes/api/delateUser'));
 
 // Test route
 app.get('/api/test', (req, res) => {
