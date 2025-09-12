@@ -289,11 +289,11 @@ function Register() {
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-slate-600 font-light">
                 I agree to the{' '}
-                <Link to="/TermsOfService" className="text-slate-900 hover:text-slate-700 transition-colors duration-200">
+                <Link to="/terms-of-service" className="text-slate-900 hover:text-slate-700 transition-colors duration-200">
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link to="/PrivacyPolicy" className="text-slate-900 hover:text-slate-700 transition-colors duration-200">
+                <Link to="/privacy-policy" className="text-slate-900 hover:text-slate-700 transition-colors duration-200">
                   Privacy Policy
                 </Link>
               </label>

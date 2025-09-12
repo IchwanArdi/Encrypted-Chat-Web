@@ -72,7 +72,7 @@ const TermsOfService = () => {
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">6. Privasi dan Data</h2>
               <p className="text-gray-700">
                 Pengumpulan dan penggunaan informasi pribadi Anda diatur oleh{' '}
-                <a href="/PrivacyPolicy" className="text-blue-600 hover:text-blue-800 underline">
+                <a href="/privacy-policy" className="text-blue-600 hover:text-blue-800 underline">
                   Kebijakan Privasi
                 </a>{' '}
                 kami. Dengan menggunakan layanan ini, Anda setuju dengan praktik privasi kami.

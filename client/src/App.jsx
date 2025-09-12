@@ -42,7 +42,7 @@ function App() {
           }
         />
         <Route
-          path="/PrivacyPolicy"
+          path="/privacy-policy"
           element={
             <AuthLayout>
               <PrivacyPolicy />
@@ -50,7 +50,7 @@ function App() {
           }
         />
         <Route
-          path="/TermsOfService"
+          path="/terms-of-service"
           element={
             <AuthLayout>
               <TermsOfService />
