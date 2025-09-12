@@ -4,6 +4,8 @@ import AuthLayout from './layouts/AuthLayout';
 import IndexPage from './pages/IndexPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import DashboardChatPage from './pages/DashboardChatPage';
 import AuthSuccess from './components/AuthSuccess';
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
@@ -36,6 +38,22 @@ function App() {
           element={
             <AuthLayout>
               <Register />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/PrivacyPolicy"
+          element={
+            <AuthLayout>
+              <PrivacyPolicy />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/TermsOfService"
+          element={
+            <AuthLayout>
+              <TermsOfService />
             </AuthLayout>
           }
         />
