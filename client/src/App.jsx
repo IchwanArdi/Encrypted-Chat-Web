@@ -58,14 +58,6 @@ function App() {
             </AuthLayout>
           }
         />
-        <Route
-          path="/account-deletion-form"
-          element={
-            <AuthLayout>
-              <AccountDeletionForm />
-            </AuthLayout>
-          }
-        />
 
         {/* OAuth Success Handler */}
         <Route path="/auth/success" element={<AuthSuccess />} />
@@ -77,6 +69,17 @@ function App() {
             <ProtectedRoute>
               <AuthLayout>
                 <DashboardChatPage />
+              </AuthLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/account-deletion-form"
+          element={
+            <ProtectedRoute>
+              <AuthLayout>
+                <AccountDeletionForm />
               </AuthLayout>
             </ProtectedRoute>
           }
