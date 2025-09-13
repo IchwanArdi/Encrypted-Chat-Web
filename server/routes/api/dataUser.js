@@ -8,7 +8,7 @@ router.get('/user', async (req, res) => {
     if (req.session.user) {
       // Fetch complete user data from database
       const user = await User.findById(req.session.user._id);
-      
+
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -20,12 +20,12 @@ router.get('/user', async (req, res) => {
           firstName: user.profile.firstName,
           lastName: user.profile.lastName,
           displayName: user.profile.displayName || `${user.profile.firstName} ${user.profile.lastName}`.trim(),
-          email: user.auth.local.email,
+          email: user.auth.local.email || user.auth.google.email || user.auth.facebook.email,
           avatar: user.profile.avatar,
           authMethods: user.authMethods,
           lastLoginAt: user.lastLoginAt,
-          createdAt: user.createdAt
-        }
+          createdAt: user.createdAt,
+        },
       });
     } else {
       res.status(401).json({ message: 'Unauthorized' });

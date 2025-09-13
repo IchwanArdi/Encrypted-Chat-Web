@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 
-// GET /api/auth/verify
 router.get('/verify', async (req, res) => {
   try {
     // Get token from header
