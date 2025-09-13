@@ -71,9 +71,8 @@ app.get('/', (req, res) => {
   res.json({
     message: 'Server is running!',
     environment: process.env.NODE_ENV || 'development',
-    socketSupport: true,
   });
 });
 
-// Export app untuk server.js
+// Export untuk Vercel serverless
 module.exports = app;
