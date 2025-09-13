@@ -1,4 +1,3 @@
-// app.js - Updated and Fixed
 const express = require('express');
 const connectDB = require('./config/db');
 const session = require('express-session');
@@ -54,7 +53,6 @@ app.use(passport.session());
 // Routes
 app.use('/api/auth', require('./routes/auth/login'));
 app.use('/api/auth', require('./routes/auth/register'));
-
 app.use('/api/auth', require('./routes/auth/social'));
 app.use('/api/auth', require('./routes/auth/logout'));
 app.use('/api/auth', require('./routes/auth/verify'));
@@ -73,8 +71,9 @@ app.get('/', (req, res) => {
   res.json({
     message: 'Server is running!',
     environment: process.env.NODE_ENV || 'development',
+    socketSupport: true,
   });
 });
 
-// Export untuk Vercel serverless
+// Export app untuk server.js
 module.exports = app;
