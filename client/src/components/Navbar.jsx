@@ -49,7 +49,7 @@ function Navbar() {
     <header
       className={`w-full max-w-7xl mx-auto sticky z-50 
         shadow-md rounded-2xl p-4 mb-4 backdrop-blur-md transition-all duration-300 top-0
-        ${scrolled ? 'top-0 bg-white/80' : 'md:top-10 bg-transparent'}
+        ${scrolled ? 'top-0' : 'md:top-10 bg-transparent'}
       `}
     >
       <div className="flex items-center justify-between">
