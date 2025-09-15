@@ -4,7 +4,7 @@ import { User, ChevronDown } from 'lucide-react';
 import logo from '../assets/logo.webp';
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
   const mobileMenuRef = useRef(null);
@@ -22,19 +22,6 @@ function Navbar() {
     };
   }, [mobileMenuRef]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleButtonClick = () => {
     setIsButtonPressed(true);
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -46,13 +33,8 @@ function Navbar() {
   };
 
   return (
-    <header
-      className={`w-full max-w-7xl mx-auto sticky z-50 
-        shadow-md rounded-2xl p-4 mb-4 backdrop-blur-md transition-all duration-300 top-0
-        ${scrolled ? 'top-0' : 'md:top-10 bg-transparent'}
-      `}
-    >
-      <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 w-full z-50 flex justify-center">
+      <div className="max-w-6xl w-full shadow-md justify-between flex backdrop-blur-md rounded-2xl p-4">
         {/* Logo placeholder */}
         <Link to="/">
           <img src={logo} alt="Logo" className="h-12 md:h-15 object-cover" />
@@ -60,12 +42,12 @@ function Navbar() {
 
         {/* Desktop Navigation - hanya tampil di desktop */}
         <div className="hidden md:flex gap-x-6 items-center">
-          <Link to="/login" className="text-lg font-semibold text-black hover:text-blue-500 transition-all duration-200 cursor-pointer relative group">
+          <Link to="/login" className="text-lg font-semibold text-white hover:text-blue-500 transition-all duration-200 cursor-pointer relative group">
             Login
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-200 group-hover:w-full"></span>
           </Link>
           <Link to="/register" className="text-lg font-semibold items-center py-2 px-8 rounded-2xl bg-black text-white hover:bg-gray-800 transform transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl">
-            Signup
+            Daftar sekarang
           </Link>
         </div>
 
@@ -75,12 +57,12 @@ function Navbar() {
             onClick={handleButtonClick}
             className={`relative overflow-hidden group
               rounded-2xl p-3 
-             hover:bg-gray-50 
+             hover:bg-transparent
               transition-all duration-200 cursor-pointer
               shadow-md hover:shadow-lg
               transform hover:scale-105
               ${isButtonPressed ? 'scale-95' : ''}
-              ${isMobileMenuOpen ? 'bg-gray-100 border-blue-400 shadow-lg' : ''}
+              ${isMobileMenuOpen ? 'bg-transparent border-blue-400 shadow-lg' : ''}
             `}
           >
             {/* Ripple effect */}
@@ -88,8 +70,8 @@ function Navbar() {
 
             {/* Button content */}
             <div className="relative z-10 flex items-center space-x-2">
-              <User className={`h-5 w-5 text-gray-700 transition-all duration-200 ${isMobileMenuOpen ? 'text-blue-600' : ''}`} />
-              <ChevronDown className={`h-4 w-4 text-gray-500 transition-all duration-200 transform ${isMobileMenuOpen ? 'rotate-180 text-blue-600' : ''}`} />
+              <User className={`h-5 w-5 text-slate-50 transition-all duration-200 ${isMobileMenuOpen ? 'text-blue-600' : ''}`} />
+              <ChevronDown className={`h-4 w-4 text-slate-50 transition-all duration-200 transform ${isMobileMenuOpen ? 'rotate-180 text-blue-600' : ''}`} />
             </div>
 
             {/* Hover glow effect */}
@@ -98,35 +80,33 @@ function Navbar() {
 
           {/* Mobile Menu Dropdown */}
           <div
-            className={`absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 transform origin-top-right z-50
+            className={`absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 transform origin-top-right z-50
             ${isMobileMenuOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
           `}
           >
             {/* Menu items with stagger animation */}
             <div className="py-2">
-              <button
-                className={`block w-full text-left px-6 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200 relative group
+              <Link
+                to="/login"
+                className={`block w-full text-left px-6 py-3 text-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200 relative group
                 ${isMobileMenuOpen ? 'animate-fadeInUp' : ''}
               `}
                 style={{ animationDelay: '50ms' }}
               >
-                <Link to="/login" className="relative z-10">
-                  Login
-                </Link>
+                Login
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-top"></div>
-              </button>
+              </Link>
 
-              <button
-                className={`block w-full text-left px-6 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200 relative group
+              <Link
+                to="/register"
+                className={`block w-full text-left px-6 py-3 text-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200 relative group
                 ${isMobileMenuOpen ? 'animate-fadeInUp' : ''}
               `}
                 style={{ animationDelay: '100ms' }}
               >
-                <Link to="/register" className="relative z-10">
-                  Signup
-                </Link>
+                Signup
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-top"></div>
-              </button>
+              </Link>
             </div>
 
             {/* Bottom accent */}
