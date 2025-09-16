@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.webp';
 
 function IndexPage() {
@@ -47,13 +48,13 @@ function IndexPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white overflow-x-hidden">
       {/* Hero yang lebih natural */}
-      <section className="px-6 mt-20">
+      <section className="px-6 pt-15 md:pt-20 mt-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             {/* Badge yang lebih catchy */}
             <div className="inline-flex items-center gap-2 bg-gray-800/60 backdrop-blur border border-purple-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <span className="text-sm">Lagi ramai nih, 2.3k orang online!</span>
+              <span className="py-1 px-4 bg-gray-600 font-semibold rounded-full">New</span>
+              <span className="text-sm">Guyu Chat Beta sekarang sudah tersedia! 🎉</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
@@ -69,9 +70,9 @@ function IndexPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
+              <Link to="/login" className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
                 🚀 Mulai Chat Sekarang
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -220,7 +221,9 @@ function IndexPage() {
           </h2>
           <p className="text-xl text-gray-300 mb-8">Gratis kok, gak ada bayar-bayar. Langsung gas aja! 🔥</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl font-black text-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform">🚀 Langsung Chat Sekarang</button>
+            <Link to="/login" className="px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl font-black text-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform">
+              🚀 Langsung Chat Sekarang
+            </Link>
           </div>
           <p className="text-sm text-gray-500 mt-6">Gak perlu kartu kredit atau ribet-ribet. Just chat!</p>
         </div>
@@ -241,18 +244,18 @@ function IndexPage() {
             </div>
 
             <div className="flex gap-8 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">
+              <Link to="/about" className="hover:text-white transition-colors">
                 About
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </Link>
+              <Link to="/privacy-policy" className="hover:text-white transition-colors">
                 Privacy
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </Link>
+              <Link to="/contact" className="hover:text-white transition-colors">
                 Contact
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </Link>
+              <Link to="/help" className="hover:text-white transition-colors">
                 Help
-              </a>
+              </Link>
             </div>
           </div>
           <div className="text-center text-gray-500 text-sm mt-8">© 2025 Guyu Chat. Made with ❤️ in Indonesia</div>

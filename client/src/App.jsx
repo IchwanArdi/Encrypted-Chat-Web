@@ -5,15 +5,20 @@ import IndexPage from './pages/IndexPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import AboutPage from './pages/AboutPage';
+import HelpPage from './pages/HelpPage';
+import ContactPage from './pages/ContactPage';
 import TermsOfService from './pages/TermsOfService';
 import DashboardChatPage from './pages/DashboardChatPage';
 import AccountDeletionForm from './pages/AccountDeletionForm';
 import AuthSuccess from './components/AuthSuccess';
-import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Landing Page */}
         <Route
@@ -21,6 +26,34 @@ function App() {
           element={
             <MainLayout>
               <IndexPage />
+            </MainLayout>
+          }
+        />
+
+        {/* Public Pages */}
+        <Route
+          path="/about"
+          element={
+            <MainLayout>
+              <AboutPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/help"
+          element={
+            <MainLayout>
+              <HelpPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
+            <MainLayout>
+              <ContactPage />
             </MainLayout>
           }
         />
@@ -34,6 +67,7 @@ function App() {
             </AuthLayout>
           }
         />
+
         <Route
           path="/register"
           element={
@@ -42,6 +76,7 @@ function App() {
             </AuthLayout>
           }
         />
+
         <Route
           path="/privacy-policy"
           element={
@@ -50,6 +85,7 @@ function App() {
             </AuthLayout>
           }
         />
+
         <Route
           path="/terms-of-service"
           element={
@@ -62,7 +98,7 @@ function App() {
         {/* OAuth Success Handler */}
         <Route path="/auth/success" element={<AuthSuccess />} />
 
-        {/* Protected Chat Page */}
+        {/* Protected Routes */}
         <Route
           path="/chat"
           element={

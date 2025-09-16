@@ -1,114 +1,181 @@
+import { Link } from 'react-router-dom';
+
 function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Kebijakan Privasi GuyuChat</h1>
-          <p className="text-gray-600 mb-8">
-            <em>Terakhir diperbarui: {new Date().toLocaleDateString('id-ID')}</em>
-          </p>
+    <div className="min-h-screen pt-20 w-full bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
+      {/* Main Content */}
+      <div className="px-6 py-12">
+        <div className="max-w-4xl mx-auto">
+          {/* Hero Section */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-black mb-6">
+              Privacy <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500">Policy</span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">Transparansi penuh tentang bagaimana kami melindungi data dan privasi Anda. Karena privasi adalah hak, bukan privilege.</p>
+            <p className="text-sm text-gray-400 mt-4">Last updated: January 2025</p>
+          </div>
 
-          <div className="space-y-8">
-            {/* Section 1 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. Informasi yang Kami Kumpulkan</h2>
-              <p className="text-gray-700 mb-4">Kami mengumpulkan informasi berikut untuk memberikan layanan terbaik:</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-                <li>
-                  <strong>Informasi Akun:</strong> Nama, email, dan foto profil dari Facebook/Google
-                </li>
-                <li>
-                  <strong>Informasi Chat:</strong> Pesan yang Anda kirim melalui aplikasi
-                </li>
-                <li>
-                  <strong>Data Teknis:</strong> Alamat IP, informasi perangkat, dan log aktivitas
-                </li>
-              </ul>
-            </section>
-
-            {/* Section 2 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">2. Bagaimana Kami Menggunakan Informasi</h2>
-              <p className="text-gray-700 mb-4">Informasi Anda digunakan untuk:</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-                <li>Menyediakan layanan chat dan komunikasi</li>
-                <li>Mempertahankan dan meningkatkan aplikasi</li>
-                <li>Memberikan dukungan pelanggan</li>
-                <li>Memastikan keamanan platform</li>
-              </ul>
-            </section>
-
-            {/* Section 3 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">3. Berbagi Informasi</h2>
-              <p className="text-gray-700 mb-4">Kami tidak menjual atau menyewakan informasi pribadi Anda kepada pihak ketiga. Informasi hanya dibagikan dalam situasi berikut:</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-                <li>Dengan persetujuan eksplisit Anda</li>
-                <li>Untuk mematuhi kewajiban hukum</li>
-                <li>Untuk melindungi hak dan keamanan pengguna lain</li>
-              </ul>
-            </section>
-
-            {/* Section 4 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">4. Keamanan Data</h2>
-              <p className="text-gray-700">Kami menerapkan langkah-langkah keamanan teknis dan organisasi yang sesuai untuk melindungi informasi pribadi Anda dari akses yang tidak sah, perubahan, pengungkapan, atau penghancuran.</p>
-            </section>
-
-            {/* Section 5 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">5. Hak Anda</h2>
-              <p className="text-gray-700 mb-4">Anda memiliki hak untuk:</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-                <li>Mengakses informasi pribadi yang kami miliki tentang Anda</li>
-                <li>Memperbarui atau mengoreksi informasi yang tidak akurat</li>
-                <li>Meminta penghapusan akun dan data Anda</li>
-                <li>Menarik persetujuan untuk pemrosesan data</li>
-              </ul>
-            </section>
-
-            {/* Section 6 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">6. Penghapusan Data</h2>
-              <p className="text-gray-700">
-                Anda dapat meminta penghapusan data dengan mengikuti petunjuk di halaman{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800 underline">
-                  Penghapusan Data
-                </a>{' '}
-                atau menghubungi kami langsung.
-              </p>
-            </section>
-
-            {/* Section 7 */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">7. Perubahan Kebijakan</h2>
-              <p className="text-gray-700">Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Perubahan akan diberitahukan melalui aplikasi atau email.</p>
-            </section>
-
-            {/* Contact Section */}
-            <section className="bg-gray-50 p-6 rounded-lg">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">8. Hubungi Kami</h2>
-              <p className="text-gray-700 mb-4">Jika Anda memiliki pertanyaan tentang kebijakan privasi ini, silakan hubungi:</p>
-              <div className="text-gray-700 space-y-1">
-                <p>
-                  <strong>Email:</strong> privacy@guyuchat.com
-                </p>
-                <p>
-                  <strong>Alamat:</strong> [Alamat lengkap Anda]
-                </p>
-                <p>
-                  <strong>Telepon:</strong> [Nomor telepon]
-                </p>
+          {/* Quick Summary */}
+          <div className="bg-green-500/10 border border-green-500/30 rounded-3xl p-8 mb-12">
+            <h2 className="text-2xl font-bold mb-4 text-green-300">Ringkasan Singkat</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-bold text-white mb-2">✅ Yang Kami LAKUKAN:</h3>
+                <ul className="text-gray-300 space-y-1 text-sm">
+                  <li>• Enkripsi end-to-end semua pesan</li>
+                  <li>• Simpan data minimal yang diperlukan</li>
+                  <li>• Transparan tentang praktik data</li>
+                  <li>• Berikan kontrol penuh kepada user</li>
+                </ul>
               </div>
-            </section>
+              <div>
+                <h3 className="font-bold text-white mb-2">❌ Yang TIDAK Kami Lakukan:</h3>
+                <ul className="text-gray-300 space-y-1 text-sm">
+                  <li>• Jual data pribadi Anda</li>
+                  <li>• Baca pesan pribadi Anda</li>
+                  <li>• Track aktivitas di luar platform</li>
+                  <li>• Bagikan info tanpa izin</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          {/* Navigation */}
-          <div className="mt-8 pt-6 border-t border-gray-200 text-center">
-            <a href="/register" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-              ← Kembali ke Beranda
-            </a>
+          {/* Detailed Sections */}
+          <div className="space-y-8">
+            {/* Data Collection */}
+            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
+              <h2 className="text-2xl font-bold mb-4 text-blue-300">Data yang Kami Kumpulkan</h2>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-white mb-2">Informasi Akun</h3>
+                  <p className="text-gray-300">Email, nama, dan password terenkripsi untuk membuat dan mengelola akun Anda.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white mb-2">Data Komunikasi</h3>
+                  <p className="text-gray-300">Metadata pesan (waktu, pengirim/penerima) untuk fungsionalitas chat. Konten pesan dienkripsi end-to-end.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white mb-2">Data Teknis</h3>
+                  <p className="text-gray-300">Informasi perangkat dan koneksi minimal untuk optimalisasi performa dan keamanan.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* How We Use Data */}
+            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
+              <h2 className="text-2xl font-bold mb-4 text-purple-300">Bagaimana Kami Menggunakan Data</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold text-white mb-2">Operasional Platform</h3>
+                  <ul className="text-gray-300 space-y-1 text-sm">
+                    <li>• Memfasilitasi pengiriman pesan</li>
+                    <li>• Manajemen akun pengguna</li>
+                    <li>• Pemeliharaan keamanan sistem</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white mb-2">Peningkatan Layanan</h3>
+                  <ul className="text-gray-300 space-y-1 text-sm">
+                    <li>• Analisis performa (tanpa konten pesan)</li>
+                    <li>• Debugging dan perbaikan bug</li>
+                    <li>• Pengembangan fitur baru</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Data Security */}
+            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
+              <h2 className="text-2xl font-bold mb-4 text-yellow-300">Keamanan Data</h2>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 flex items-center justify-center mt-1">
+                    <span className="text-green-400 text-sm">🔐</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">End-to-End Encryption</h3>
+                    <p className="text-gray-300 text-sm">Semua pesan dienkripsi dengan algoritma AES-256. Bahkan kami tidak bisa membaca pesan Anda.</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8  flex items-center justify-center mt-1">
+                    <span className="text-blue-400 text-sm">🛡️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">Secure Infrastructure</h3>
+                    <p className="text-gray-300 text-sm">Server dilindungi dengan firewall, SSL/TLS, dan monitoring keamanan 24/7.</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 flex items-center justify-center mt-1">
+                    <span className="text-purple-400 text-sm">🔄</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">Regular Security Audits</h3>
+                    <p className="text-gray-300 text-sm">Audit keamanan berkala untuk memastikan sistem selalu terlindungi dari ancaman terbaru.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Your Rights */}
+            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
+              <h2 className="text-2xl font-bold mb-4 text-pink-300">Hak-Hak Anda</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-green-400">✅</span>
+                    <span className="text-white font-semibold">Akses Data</span>
+                  </div>
+                  <p className="text-gray-300 text-sm ml-6">Minta salinan semua data pribadi yang kami miliki tentang Anda.</p>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-green-400">✅</span>
+                    <span className="text-white font-semibold">Koreksi Data</span>
+                  </div>
+                  <p className="text-gray-300 text-sm ml-6">Perbaiki atau update informasi yang tidak akurat.</p>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-green-400">✅</span>
+                    <span className="text-white font-semibold">Hapus Akun</span>
+                  </div>
+                  <p className="text-gray-300 text-sm ml-6">Hapus akun dan semua data terkait kapan saja.</p>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-green-400">✅</span>
+                    <span className="text-white font-semibold">Portabilitas</span>
+                  </div>
+                  <p className="text-gray-300 text-sm ml-6">Export data Anda dalam format yang dapat dibaca.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact & Updates */}
+            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
+              <h2 className="text-2xl font-bold mb-4 text-cyan-300">Kontak & Update</h2>
+              <div className="space-y-4">
+                <p className="text-gray-300">
+                  Punya pertanyaan tentang privasi atau ingin menggunakan hak-hak Anda? Hubungi kami di{' '}
+                  <Link to="/contact" className="text-cyan-400 hover:text-cyan-300 underline">
+                    halaman contact
+                  </Link>
+                  .
+                </p>
+                <p className="text-gray-300">Kami akan memberitahu semua perubahan signifikan pada kebijakan privasi ini melalui email dan notifikasi di platform minimal 30 hari sebelumnya.</p>
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4">
+                  <p className="text-cyan-300 font-semibold text-sm">💡 Tip: Bookmark halaman ini untuk update terbaru tentang kebijakan privasi kami.</p>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="px-6 py-8 border-t border-gray-700/50">
+        <div className="max-w-4xl mx-auto text-center text-gray-400">
+          <p>© 2025 Guyu Chat. Privasi Anda adalah prioritas utama kami.</p>
         </div>
       </div>
     </div>

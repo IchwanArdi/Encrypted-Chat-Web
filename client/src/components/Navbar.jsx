@@ -46,7 +46,10 @@ function Navbar() {
             Login
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-200 group-hover:w-full"></span>
           </Link>
-          <Link to="/register" className="text-lg font-semibold items-center py-2 px-8 rounded-2xl bg-black text-white hover:bg-gray-800 transform transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl">
+          <Link
+            to="/register"
+            className="text-lg font-semibold items-center py-2 px-8 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:bg-gray-800 transform transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl"
+          >
             Daftar sekarang
           </Link>
         </div>
@@ -88,7 +91,7 @@ function Navbar() {
             <div className="py-2">
               <Link
                 to="/login"
-                className={`block w-full text-left px-6 py-3 text-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200 relative group
+                className={`block w-full text-left px-6 py-3 text-white
                 ${isMobileMenuOpen ? 'animate-fadeInUp' : ''}
               `}
                 style={{ animationDelay: '50ms' }}
@@ -99,7 +102,7 @@ function Navbar() {
 
               <Link
                 to="/register"
-                className={`block w-full text-left px-6 py-3 text-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-200 relative group
+                className={`block w-full text-left px-6 py-3 text-white
                 ${isMobileMenuOpen ? 'animate-fadeInUp' : ''}
               `}
                 style={{ animationDelay: '100ms' }}
