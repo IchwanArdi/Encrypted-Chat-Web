@@ -3,27 +3,83 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 
+// Validation helper
+const validateRegistrationInput = (data) => {
+  const { firstName, lastName, email, password } = data;
+  const errors = [];
+
+  if (!firstName?.trim()) errors.push('First name is required');
+  if (!lastName?.trim()) errors.push('Last name is required');
+  if (!email?.trim()) errors.push('Email is required');
+  if (!password) errors.push('Password is required');
+  if (password && password.length < 3) errors.push('Password must be at least 3 characters');
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+};
+
+// Check if email exists
+const checkEmailExists = async (email) => {
+  return await User.findOne({
+    $or: [{ email: email }, { 'auth.local.email': email }],
+  });
+};
+
+// Create user data structure
+const createUserData = (userData, hashedPassword) => {
+  const { firstName, lastName, email } = userData;
+
+  return {
+    email,
+    profile: {
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      displayName: `${firstName.trim()} ${lastName.trim()}`,
+      avatar: null,
+    },
+    auth: {
+      local: {
+        email,
+        password: hashedPassword,
+        isEmailVerified: false,
+      },
+    },
+    authMethods: ['email'],
+    isActive: true,
+    lastLoginAt: null,
+    createdAt: new Date(),
+  };
+};
+
+// Format user response
+const formatUserResponse = (user) => ({
+  id: user._id,
+  firstName: user.profile.firstName,
+  lastName: user.profile.lastName,
+  displayName: user.profile.displayName,
+  email: user.email,
+  isEmailVerified: user.auth.local.isEmailVerified,
+});
+
 router.post('/register', async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-
-  // Fix: Perbaiki kondisi validasi (sebelumnya ada syntax error)
-  if (!firstName || !lastName || !email || !password) {
-    return res.status(400).json({ message: 'Semua field wajib diisi' });
-  }
-
-  if (password.length < 3) {
-    return res.status(400).json({
-      message: 'Password harus minimal 3 karakter',
-    });
-  }
-
   try {
-    // Cek apakah email sudah terdaftar (baik di field utama atau di auth.local.email)
-    const emailExists = await User.findOne({
-      $or: [{ email: email }, { 'auth.local.email': email }],
-    });
+    const { firstName, lastName, email, password } = req.body;
 
-    if (emailExists) {
+    // Validate input
+    const validation = validateRegistrationInput({ firstName, lastName, email, password });
+    if (!validation.isValid) {
+      return res.status(400).json({
+        message: validation.errors[0], // Return first error
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // Check if email already exists
+    const existingUser = await checkEmailExists(normalizedEmail);
+    if (existingUser) {
       return res.status(400).json({
         message: 'Email sudah terdaftar',
       });
@@ -32,48 +88,31 @@ router.post('/register', async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Buat user baru sesuai dengan struktur model yang baru
-    const userBaru = new User({
-      email: email, // Email utama
-      profile: {
-        firstName: firstName,
-        lastName: lastName,
-        displayName: `${firstName} ${lastName}`, // Gabungkan nama depan dan belakang
-        avatar: null, // Default avatar kosong
-      },
-      auth: {
-        local: {
-          email: email,
-          password: hashedPassword,
-          isEmailVerified: false,
-        },
-      },
-      authMethods: ['email'], // Tambahkan metode auth email
-      isActive: true,
-      lastLoginAt: null,
-      createdAt: new Date(),
-    });
+    // Create and save user
+    const userData = createUserData({ firstName, lastName, email: normalizedEmail }, hashedPassword);
+    const newUser = new User(userData);
+    await newUser.save();
 
-    await userBaru.save();
-
+    // Return success response
     return res.status(201).json({
       message: 'Registrasi berhasil',
-      user: {
-        id: userBaru._id,
-        firstName: userBaru.profile.firstName,
-        lastName: userBaru.profile.lastName,
-        displayName: userBaru.profile.displayName,
-        email: userBaru.email,
-        isEmailVerified: userBaru.auth.local.isEmailVerified,
-      },
+      user: formatUserResponse(newUser),
     });
-  } catch (err) {
-    console.error('Register error:', err);
+  } catch (error) {
+    console.error('Register error:', error);
 
-    // Handle duplicate email error
-    if (err.code === 11000) {
+    // Handle duplicate email error from MongoDB
+    if (error.code === 11000) {
       return res.status(400).json({
         message: 'Email sudah terdaftar',
+      });
+    }
+
+    // Handle validation errors from Mongoose
+    if (error.name === 'ValidationError') {
+      const firstError = Object.values(error.errors)[0];
+      return res.status(400).json({
+        message: firstError.message,
       });
     }
 
