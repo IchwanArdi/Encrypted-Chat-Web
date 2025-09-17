@@ -138,10 +138,10 @@ function HelpPage() {
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-4 gap-8">
+            <div className="grid lg:grid-cols-4 gap-8 ">
               {/* Categories Sidebar */}
               <div className="lg:col-span-1">
-                <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-6 sticky top-8">
+                <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-6 sticky top-30">
                   <h2 className="text-xl font-bold mb-6 text-cyan-300">Kategori</h2>
                   <div className="space-y-2">
                     {faqCategories.map((category) => (

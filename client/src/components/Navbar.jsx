@@ -83,7 +83,7 @@ function Navbar() {
 
           {/* Mobile Menu Dropdown */}
           <div
-            className={`absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 transform origin-top-right z-50
+            className={`absolute right-0 mt-5 w-48 bg-gray-800 text-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 transform origin-top-right z-50
             ${isMobileMenuOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
           `}
           >
