@@ -1,0 +1,16 @@
+# Configuration Dependabot untuk pemeriksaan otomatis pembaruan dependensi & keamanan
+version: 2
+updates:
+  # Pembaruan otomatis untuk dependensi npm Frontend (/client)
+  - package-ecosystem: "npm"
+    directory: "/client"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Pembaruan otomatis untuk dependensi npm Backend (/server)
+  - package-ecosystem: "npm"
+    directory: "/server"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5

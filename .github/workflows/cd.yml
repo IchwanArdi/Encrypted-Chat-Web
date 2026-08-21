@@ -1,0 +1,82 @@
+name: Continuous Deployment (CD)
+
+# Workflow yang terpicu secara otomatis ketika terjadi push atau merge commit ke branch utama (main/master).
+# Berfungsi untuk mengotomatiskan deployment aplikasi ke platform hosting (misal: Vercel / Render / AWS).
+on:
+  push:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+
+jobs:
+  # ==========================================
+  # JOB 1: Deploy Frontend ke Vercel
+  # ==========================================
+  deploy-frontend:
+    name: Deploy Frontend (Vercel)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install Frontend Dependencies
+        working-directory: ./client
+        run: npm ci
+
+      - name: Build Application
+        working-directory: ./client
+        run: npm run build
+
+      # Langkah deployment nyata ke Vercel (memerlukan Secret Token di GitHub Repository Settings)
+      # Untuk mengaktifkan deployment otomatis ini, hapus tanda komentar (#) pada langkah di bawah:
+      #
+      # - name: Deploy Client to Vercel
+      #   uses: amondnet/vercel-action@v25
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_CLIENT }}
+      #     working-directory: ./client
+      #     vercel-args: '--prod'
+
+  # ==========================================
+  # JOB 2: Deploy Backend Server
+  # ==========================================
+  deploy-backend:
+    name: Deploy Backend Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify Backend Integrity Before Release
+        working-directory: ./server
+        run: |
+          npm ci
+          node --check server.js app.js
+
+      # Langkah deployment backend (misalnya ke Vercel Serverless / Render / Railway / Docker Hub)
+      #
+      # - name: Deploy Server to Vercel
+      #   uses: amondnet/vercel-action@v25
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_SERVER }}
+      #     working-directory: ./server
+      #     vercel-args: '--prod'

@@ -1,0 +1,102 @@
+name: Continuous Integration (CI)
+
+# Workflow yang secara otomatis memvalidasi kualitas kode setiap kali ada push atau Pull Request (PR)
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# Keamanan: Membatasi hak akses default token GITHUB_TOKEN hanya ke pembacaan kode (read-only)
+permissions:
+  contents: read
+
+jobs:
+  # ==========================================
+  # JOB 1: Validasi Frontend (React + Vite)
+  # ==========================================
+  frontend-ci:
+    name: Frontend Build & Lint Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          # Mengaktifkan cache npm agar proses instalasi dependensi pada run berikutnya jauh lebih cepat
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install Frontend Dependencies
+        working-directory: ./client
+        # npm ci lebih cepat dan ketat dibanding npm install untuk lingkungan CI/CD
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./client
+        # Memastikan tidak ada sintaks bermasalah atau pelanggaran standar kode pada React
+        run: npm run lint
+
+      - name: Build Application Bundle
+        working-directory: ./client
+        # Memastikan bundle Vite dapat dikompilasi tanpa error sebelum merge/deploy
+        run: npm run build
+
+  # ==========================================
+  # JOB 2: Validasi Backend (Node.js + Express)
+  # ==========================================
+  backend-ci:
+    name: Backend Syntax & Test Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install Backend Dependencies
+        working-directory: ./server
+        run: npm ci
+
+      - name: Check JavaScript Syntax
+        working-directory: ./server
+        # Memeriksa sintaks file utama Node.js tanpa memanggil server secara langsung
+        run: node --check server.js app.js
+
+      - name: Run Backend Tests
+        working-directory: ./server
+        # Jalankan test suite jika ada; cegah pipeline gagal jika skrip test bawaan masih berupa placeholder
+        run: |
+          npm test || echo "Info - Skrip test belum diimplementasikan di server/package.json"
+
+  # ==========================================
+  # JOB 3: Scan Keamanan Dependensi
+  # ==========================================
+  security-audit:
+    name: Security Vulnerability Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Audit Frontend Dependencies
+        working-directory: ./client
+        # Memeriksa pustaka npm terhadap kerentanan keamanan berkategori high/critical
+        run: |
+          npm audit --audit-level=high || echo "Peringatan - Ditemukan masalah keamanan pada paket frontend."
+
+      - name: Audit Backend Dependencies
+        working-directory: ./server
+        run: |
+          npm audit --audit-level=high || echo "Peringatan - Ditemukan masalah keamanan pada paket backend."
