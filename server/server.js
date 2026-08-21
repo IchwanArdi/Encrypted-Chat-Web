@@ -2,7 +2,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const app = require('./app');
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const DB = process.env.MONGO_URI;
 
 // Create HTTP server
