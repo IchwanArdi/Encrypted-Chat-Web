@@ -10,79 +10,13 @@ const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
 };
 
-// Helper function to find or create user
-const findOrCreateUser = async (profile, provider) => {
-  try {
-    // Cari user berdasarkan provider ID
-    let user = await User.findOne({ [`auth.${provider}.id`]: profile.id });
-
-    if (user) {
-      // Update last login
-      user.lastLoginAt = new Date();
-      await user.save();
-      return user;
-    }
-
-    // Cari user berdasarkan email (untuk link account)
-    if (profile.emails && profile.emails[0]) {
-      user = await User.findOne({ email: profile.emails[0].value });
-
-      if (user) {
-        // Link account ke existing user
-        user.auth[provider] = {
-          id: profile.id,
-          email: profile.emails[0].value,
-          name: profile.displayName,
-          picture: profile.photos[0]?.value,
-        };
-
-        // Add auth method if not exists
-        if (!user.authMethods.includes(provider)) {
-          user.authMethods.push(provider);
-        }
-
-        user.lastLoginAt = new Date();
-        await user.save();
-        return user;
-      }
-    }
-
-    // Create new user
-    const newUser = new User({
-      email: profile.emails?.[0]?.value,
-      profile: {
-        displayName: profile.displayName,
-        firstName: profile.name?.givenName,
-        lastName: profile.name?.familyName,
-        avatar: profile.photos?.[0]?.value,
-      },
-      auth: {
-        [provider]: {
-          id: profile.id,
-          email: profile.emails?.[0]?.value,
-          name: profile.displayName,
-          picture: profile.photos?.[0]?.value,
-        },
-      },
-      authMethods: [provider],
-      lastLoginAt: new Date(),
-    });
-
-    await newUser.save();
-    return newUser;
-  } catch (error) {
-    console.error('Error in findOrCreateUser:', error);
-    throw error;
-  }
-};
-
 // ======== GOOGLE AUTH ROUTES ========
 
 // GET /api/auth/google
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['profile', 'email'],
+    scope: ['profile', 'email'], prompt: 'select_account',
   })
 );
 
