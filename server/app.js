@@ -4,7 +4,7 @@ dotenv.config();
 const express = require('express');
 const connectDB = require('./config/db');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo').default;
 const cors = require('cors');
 const passport = require('./config/passport'); // Import passport config
 
