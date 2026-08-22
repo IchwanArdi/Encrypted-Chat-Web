@@ -1,1 +1,65 @@
+/* Hallmark · genre: editorial · macrostructure: Split Studio · theme: Atelier · tone: luxury-editorial · anchor hue: oklch(52% 0.16 30) */
+/* Hallmark · pre-emit critique: P5 H4 E5 S5 R5 V5 */
 @import 'tailwindcss';
+@import '../tokens.css';
+
+html, body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Display headings — Fraunces, roman, tight tracking ─── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-style: normal;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* ─── Body copy measure ─── */
+.prose { max-width: 65ch; }
+
+/* ─── Tabular numerics for data ─── */
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ─── Hairline rule utility ─── */
+.rule-top    { border-top: var(--rule-hairline); }
+.rule-bottom { border-bottom: var(--rule-hairline); }
+
+/* ─── Reveal stagger (page load) ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: hallmark-reveal var(--dur-long) var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+@keyframes hallmark-reveal {
+  to { opacity: 1; transform: none; }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 150ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+  }
+  .reveal {
+    animation: hallmark-reveal-reduced 150ms linear forwards;
+  }
+  @keyframes hallmark-reveal-reduced {
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ─── Scrollbar (keeps existing) ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb { background: var(--color-rule); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }

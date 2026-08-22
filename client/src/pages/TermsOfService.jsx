@@ -1,263 +1,243 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { FileText, ArrowRight } from 'lucide-react';
+
+/* Hallmark · genre: editorial · theme: Atelier
+ * Terms of Service page with responsive clamp spacing and Atelier tokens
+ */
 
 function TermsOfService() {
+  const TERMS_SECTIONS = [
+    {
+      id: 'SEC-01',
+      title: '1. Penerimaan Syarat & Ketentuan',
+      content: 'Dengan mengakses atau menggunakan platform Guyu Chat, Anda secara penuh menyetujui dan terikat oleh Syarat & Ketentuan ini. Jika Anda tidak menyetujui bagian mana pun dari ketentuan ini, Anda dilarang menggunakan layanan Guyu Chat.',
+    },
+    {
+      id: 'SEC-02',
+      title: '2. Kelayakan & Keamanan Akun',
+      content: 'Pengguna wajib berusia minimal 13 tahun. Anda bertanggung jawab menjaga kerahasiaan kredensial login Anda. Aktivitas yang dilakukan melalui akun Anda merupakan tanggung jawab hukum Anda sepenuhnya.',
+    },
+    {
+      id: 'SEC-03',
+      title: '3. Aturan Perilaku Pengguna (Acceptable Use)',
+      content: 'Pengguna dilarang memanfaatkan platform untuk tindakan ilegal, penyebaran malware, aktivitas penyadapan tanpa hak, spamming otomatis, atau pelecehan kepada pengguna lain. Pelanggaran berat akan mengakibatkan penangguhan akun secara permanen.',
+    },
+    {
+      id: 'SEC-04',
+      title: '4. Batasan Tanggung Jawab Platform',
+      content: 'Guyu Chat disediakan dengan prinsip "sebagaimana adanya" (AS-IS). Karena arsitektur zero-knowledge yang kami terapkan, kami tidak bertanggung jawab atas kehilangan kunci privat lokal atau pesan yang terhapus di perangkat pengguna.',
+    },
+    {
+      id: 'SEC-05',
+      title: '5. Ketersediaan Layanan (Uptime)',
+      content: 'Kami berusaha menjaga ketersediaan layanan sistem secara optimal. Namun, kami tidak menjamin ketersediaan tanpa henti akibat pemeliharaan jaringan terjadwal atau gangguan infrastruktur pihak ketiga.',
+    },
+    {
+      id: 'SEC-06',
+      title: '6. Perubahan Ketentuan Layanan',
+      content: 'Guyu Chat berhak memperbarui dokumen Syarat & Ketentuan ini sewaktu-waktu. Perubahan signifikan akan diumumkan melalui pembaruan pada halaman ini.',
+    },
+  ];
+
   return (
     <>
       <SEO
-        title="Terms of Service | Guyu Chat"
-        description="Baca syarat dan ketentuan penggunaan Guyu Chat: aturan akun, perilaku yang diperbolehkan, privasi & data, ketersediaan layanan, hingga batasan tanggung jawab."
-        keywords="terms of service, syarat dan ketentuan, aturan penggunaan, kebijakan pengguna, Guyu Chat, privasi, keamanan, regulasi, peraturan chat"
+        title="Ketentuan Layanan - Guyu Chat"
+        description="Dokumentasi resmi Syarat & Ketentuan penggunaan platform obrolan privat Guyu Chat."
+        keywords="terms of service, ketentuan layanan, syarat dan ketentuan, guyu chat, aturan penggunaan"
         type="article"
-        additionalMetaTags={[
-          { name: 'theme-color', content: '#1e293b' },
-          { name: 'application-name', content: 'Guyu Chat' },
-        ]}
       />
 
-      <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
-        {/* Main Content */}
-        <div className="px-6 py-12">
-          <div className="max-w-4xl mx-auto">
-            {/* Hero Section */}
-            <div className="text-center mb-16">
-              <h1 className="text-5xl font-black mb-6">
-                Terms of <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Service</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">Aturan main yang jelas dan fair untuk semua pengguna Guyu Chat. Dibuat sederhana tanpa bahasa legal yang rumit.</p>
-              <p className="text-sm text-gray-400 mt-4">Last updated: January 2025 • Effective Date: January 1, 2025</p>
+      <div
+        style={{
+          backgroundColor: 'var(--color-bg-base)',
+          color: 'var(--color-text-main)',
+          fontFamily: 'var(--font-body)',
+        }}
+        className="min-h-screen pb-[var(--space-2xl)]"
+      >
+        {/* Header */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="max-w-3xl space-y-[var(--space-sm)]">
+            <div
+              className="inline-flex items-center gap-2"
+              style={{
+                padding: 'var(--space-3xs) var(--space-xs)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+              }}
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>DOKUMEN LEGAL & LISENSI LAYANAN</span>
             </div>
 
-            {/* Quick Summary */}
-            <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-3xl p-8 mb-12">
-              <h2 className="text-2xl font-bold mb-4 text-indigo-300">TL;DR - Ringkasan Singkat</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-bold text-white mb-3">👍 Boleh:</h3>
-                  <ul className="text-gray-300 space-y-1 text-sm">
-                    <li>• Chat dengan sopan dan respect</li>
-                    <li>• Share pengalaman dan ide positif</li>
-                    <li>• Laporkan masalah atau bug</li>
-                    <li>• Gunakan fitur sesuai fungsinya</li>
-                    <li>• Hapus akun kapan saja</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-bold text-white mb-3">👎 Tidak Boleh:</h3>
-                  <ul className="text-gray-300 space-y-1 text-sm">
-                    <li>• Spam, harassment, atau trolling</li>
-                    <li>• Share konten SARA atau toxic</li>
-                    <li>• Hack atau abuse sistem</li>
-                    <li>• Pretend jadi orang lain</li>
-                    <li>• Share data pribadi orang lain</li>
-                  </ul>
-                </div>
-              </div>
+            <h1
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
+              }}
+            >
+              Ketentuan <span style={{ color: 'var(--color-accent)' }}>Layanan</span>
+            </h1>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(var(--text-sm), 2vw, var(--text-md))',
+                color: 'var(--color-text-muted)',
+                lineHeight: 1.7,
+              }}
+            >
+              Aturan dan syarat penggunaan platform Guyu Chat yang berlaku bagi seluruh pengguna.
+            </p>
+
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-text-dim)',
+              }}
+            >
+              Berlaku Efektif: 1 Januari 2026 • Versi Dokumen: TOS-v2.1
             </div>
+          </div>
+        </section>
 
-            {/* Detailed Terms */}
-            <div className="space-y-8">
-              {/* Acceptance */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-blue-300">1. Penerimaan Syarat</h2>
-                <div className="space-y-4 text-gray-300">
-                  <p>Dengan menggunakan Guyu Chat, Anda setuju untuk terikat dengan Terms of Service ini. Jika tidak setuju, silakan tidak menggunakan layanan kami.</p>
-                  <p>Kami berhak mengubah terms ini kapan saja dengan pemberitahuan minimal 30 hari sebelumnya. Penggunaan berkelanjutan berarti Anda menyetujui perubahan tersebut.</p>
-                </div>
+        {/* TL;DR Summary Block */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div
+            style={{
+              padding: 'var(--space-lg)',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: 'var(--color-bg-surface)',
+              border: 'var(--rule-hairline)',
+            }}
+            className="space-y-[var(--space-xs)]"
+          >
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+              }}
+            >
+              // RINGKASAN SINGKAT DOKUMEN
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-sm)] text-xs font-mono text-[var(--color-text-muted)]">
+              <div className="space-y-1">
+                <div style={{ fontWeight: 700, color: 'var(--color-text-main)' }}>YANG DIPERBOLEHKAN:</div>
+                <div>• Berkomunikasi secara etis & privat.</div>
+                <div>• Menggunakan layanan web tanpa biaya langganan.</div>
+                <div>• Menghapus akun kapan saja secara mandiri.</div>
               </div>
-
-              {/* Account Rules */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-purple-300">2. Aturan Akun</h2>
-                <div className="space-y-4 text-gray-300">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Eligibility</h3>
-                    <p>Anda harus berusia minimal 13 tahun. Jika di bawah 18 tahun, diperlukan persetujuan orang tua.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Account Security</h3>
-                    <p>Anda bertanggung jawab menjaga keamanan akun dan password. Jangan share credentials dengan siapapun.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">One Person, One Account</h3>
-                    <p>Satu orang hanya boleh punya satu akun. Membuat multiple accounts untuk tujuan spam atau abuse dilarang.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Acceptable Use */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-green-300">3. Acceptable Use Policy</h2>
-                <div className="space-y-4 text-gray-300">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Perilaku yang Diharapkan:</h3>
-                    <ul className="space-y-1 ml-4">
-                      <li>• Berkomunikasi dengan hormat dan sopan</li>
-                      <li>• Respect privasi dan boundaries orang lain</li>
-                      <li>• Gunakan bahasa yang appropriate (tidak kasar berlebihan)</li>
-                      <li>• Laporkan abuse atau masalah ke support</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2 ">Perilaku yang Dilarang:</h3>
-                    <ul className="space-y-1 ml-4">
-                      <li>• Harassment, bullying, atau intimidasi</li>
-                      <li>• Spam, flooding, atau automated messaging</li>
-                      <li>• Konten SARA, hate speech, atau diskriminatif</li>
-                      <li>• Phishing, scamming, atau penipuan</li>
-                      <li>• Share konten ilegal atau harmful</li>
-                      <li>• Impersonation atau pretend jadi orang lain</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Privacy & Data */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-cyan-300">4. Privasi & Data</h2>
-                <div className="space-y-4 text-gray-300">
-                  <p>
-                    Kebijakan privasi lengkap tersedia di{' '}
-                    <Link to="/privacy-policy" className="text-cyan-400 hover:text-cyan-300 underline">
-                      halaman Privacy Policy
-                    </Link>
-                    . Poin penting:
-                  </p>
-                  <ul className="space-y-2 ml-4">
-                    <li>• Pesan dienkripsi end-to-end untuk keamanan maksimal</li>
-                    <li>• Kami tidak jual atau bagikan data pribadi Anda</li>
-                    <li>• Data minimal yang dikumpulkan hanya untuk operasional</li>
-                    <li>• Anda bisa minta hapus data atau akun kapan saja</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Intellectual Property */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-yellow-300">5. Intellectual Property</h2>
-                <div className="space-y-4 text-gray-300">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Platform & Code</h3>
-                    <p>Guyu Chat dan semua kodenya adalah milik kami. Anda tidak boleh copy, reverse engineer, atau distribute tanpa izin.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">User Content</h3>
-                    <p>Pesan dan konten yang Anda kirim tetap menjadi milik Anda. Kami hanya memproses untuk memberikan layanan chat.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Copyright</h3>
-                    <p>Jangan share konten yang melanggar copyright. Jika ada laporan DMCA, kami akan tindak lanjuti sesuai hukum.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Service Availability */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-pink-300">6. Ketersediaan Layanan</h2>
-                <div className="space-y-4 text-gray-300">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Uptime Target</h3>
-                    <p>Kami berusaha menjaga layanan online 99% waktu, tapi tidak bisa guarantee 100% karena maintenance dan hal teknis lainnya.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Maintenance</h3>
-                    <p>Scheduled maintenance akan diumumkan sebelumnya. Emergency maintenance mungkin terjadi tanpa pemberitahuan.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Beta Features</h3>
-                    <p>Beberapa fitur mungkin dalam tahap beta. Kami akan jelaskan risikonya dan bisa dihentikan sewaktu-waktu.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Termination */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-red-300">7. Pemutusan Layanan</h2>
-                <div className="space-y-4 text-gray-300">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Oleh User</h3>
-                    <p>Anda bisa hapus akun kapan saja melalui settings atau email ke support. Semua data akan dihapus dalam 30 hari.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Oleh Kami</h3>
-                    <p>Kami bisa suspend atau ban akun yang melanggar terms ini. Warning akan diberikan kecuali untuk pelanggaran berat.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Appeal Process</h3>
-                    <p>Jika merasa salah di-ban, kirim email ke support dengan penjelasan. Kami akan review dalam 7 hari kerja.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Limitation of Liability */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-orange-300">8. Batasan Tanggung Jawab</h2>
-                <div className="space-y-4 text-gray-300">
-                  <p>Guyu Chat disediakan "as is". Kami tidak bertanggung jawab atas:</p>
-                  <ul className="space-y-1 ml-4">
-                    <li>• Kehilangan data akibat technical issues</li>
-                    <li>• Kerugian bisnis atau pribadi dari penggunaan platform</li>
-                    <li>• Tindakan user lain di platform</li>
-                    <li>• Gangguan layanan di luar kendali kami</li>
-                  </ul>
-                  <p>Tanggung jawab maksimal kami terbatas pada biaya yang Anda bayar (yang dalam hal ini $0 karena gratis).</p>
-                </div>
-              </div>
-
-              {/* Governing Law */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-indigo-300">9. Hukum yang Berlaku</h2>
-                <div className="space-y-4 text-gray-300">
-                  <p>Terms ini tunduk pada hukum Republik Indonesia. Jika ada sengketa, akan diselesaikan melalui:</p>
-                  <ol className="space-y-1 ml-4">
-                    <li>1. Diskusi langsung dengan support team</li>
-                    <li>2. Mediasi jika perlu</li>
-                    <li>3. Pengadilan di Jakarta sebagai opsi terakhir</li>
-                  </ol>
-                </div>
-              </div>
-
-              {/* Contact & Changes */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-teal-300">10. Kontak & Perubahan</h2>
-                <div className="space-y-4 text-gray-300">
-                  <p>
-                    Pertanyaan tentang terms ini? Email ke:{' '}
-                    <a href="mailto:legal@guyuchat.com" className="text-teal-400 hover:text-teal-300 underline">
-                      legal@guyuchat.com
-                    </a>
-                  </p>
-                  <p>Perubahan terms akan diumumkan minimal 30 hari sebelumnya via email dan notifikasi di platform. Perubahan minor (typo, clarification) bisa dilakukan tanpa notice.</p>
-                  <div className="bg-teal-500/10 border border-teal-500/30 rounded-xl p-4">
-                    <p className="text-teal-300 font-semibold text-sm">💡 Tip: Bookmark halaman ini dan cek update berkala untuk mengetahui perubahan terms.</p>
-                  </div>
-                </div>
+              <div className="space-y-1">
+                <div style={{ fontWeight: 700, color: 'var(--color-accent)' }}>YANG DILARANG:</div>
+                <div>• Melakukan serangan siber atau spamming.</div>
+                <div>• Menyalahgunakan platform untuk kegiatan ilegal.</div>
+                <div>• Mencoba mendekripsi obrolan pengguna lain.</div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Footer */}
-        <div className="px-6 py-8 border-t border-gray-700/50">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-gray-400 mb-4">Terms ini dibuat dengan bahasa sederhana agar mudah dipahami. Jika ada yang tidak jelas, jangan ragu untuk bertanya.</p>
-            <div className="flex justify-center space-x-6 text-sm">
-              <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
-                Contact Us
-              </Link>
-              <Link to="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <Link to="/about" className="text-gray-400 hover:text-white transition-colors">
-                About Us
-              </Link>
+        {/* Full Terms Stack */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+          className="space-y-[var(--space-md)]"
+        >
+          {TERMS_SECTIONS.map((sec) => (
+            <div
+              key={sec.id}
+              style={{
+                padding: 'var(--space-lg)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+              }}
+              className="space-y-[var(--space-3xs)]"
+            >
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-accent)' }}>
+                {sec.id}
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'var(--text-base)',
+                  fontWeight: 600,
+                  color: 'var(--color-text-main)',
+                }}
+              >
+                {sec.title}
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--color-text-muted)',
+                  lineHeight: 1.6,
+                }}
+              >
+                {sec.content}
+              </p>
             </div>
-            <p className="text-gray-400 text-xs mt-4">© 2025 Guyu Chat. Made with ❤️ for Indonesian chat community.</p>
+          ))}
+
+          {/* Bottom Footer Action */}
+          <div
+            style={{
+              paddingTop: 'var(--space-md)',
+              borderTop: 'var(--rule-hairline)',
+            }}
+            className="flex flex-col sm:flex-row justify-between items-center gap-[var(--space-sm)]"
+          >
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-dim)' }}>
+              Memiliki pertanyaan legal? Hubungi support@guyuchat.com
+            </div>
+            <Link
+              to="/privacy-policy"
+              style={{
+                padding: 'var(--space-xs) var(--space-sm)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                color: 'var(--color-text-main)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                textDecoration: 'none',
+              }}
+              className="inline-flex items-center gap-2 cursor-pointer"
+            >
+              <span>Baca Kebijakan Privasi</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[var(--color-accent)]" />
+            </Link>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );

@@ -1,13 +1,22 @@
-import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { User, ChevronDown } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.webp';
 
+/* Hallmark · N9 Edge-aligned minimal · knobs: CTA=outlined, wordmark=serif, padding-block=spacious */
+
+const NAV_LINKS = [
+  { path: '/about', label: 'Tentang' },
+  { path: '/help', label: 'Bantuan' },
+  { path: '/contact', label: 'Kontak' },
+  { path: '/privacy-policy', label: 'Privasi' },
+  { path: '/terms-of-service', label: 'Ketentuan' },
+];
+
 function Navbar() {
-  // const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isButtonPressed, setIsButtonPressed] = useState(false);
   const mobileMenuRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -15,126 +24,208 @@ function Navbar() {
         setIsMobileMenuOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [mobileMenuRef]);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-  const handleButtonClick = () => {
-    setIsButtonPressed(true);
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-
-    // Reset animation state after animation completes
-    setTimeout(() => {
-      setIsButtonPressed(false);
-    }, 150);
-  };
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex justify-center">
-      <div className="max-w-6xl w-full shadow-md justify-between flex backdrop-blur-md rounded-2xl p-4">
-        {/* Logo placeholder */}
-        <Link to="/">
-          <img src={logo} alt="Logo" className="h-12 md:h-15 object-cover" />
+    <header
+      className="sticky top-0 z-[200]"
+      style={{
+        backgroundColor: 'oklch(96.5% 0.008 35 / 0.92)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+      }}
+    >
+      {/* N9: wordmark hard-left, CTA hard-right, silence between */}
+      <div
+        className="flex items-center justify-between"
+        style={{
+          padding: 'var(--space-lg) var(--page-gutter)',
+          maxWidth: '80rem',
+          marginInline: 'auto',
+        }}
+      >
+        {/* Wordmark — serif display face */}
+        <Link
+          to="/"
+          className="flex items-center gap-[var(--space-sm)] group"
+          style={{ textDecoration: 'none' }}
+        >
+          <div
+            className="overflow-hidden flex items-center justify-center"
+            style={{
+              width: '2rem',
+              height: '2rem',
+              borderRadius: 'var(--radius-md)',
+              border: 'var(--rule-hairline)',
+              backgroundColor: 'var(--color-bg-base)',
+            }}
+          >
+            <img src={logo} alt="Guyu Chat" className="w-full h-full object-cover" />
+          </div>
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-md)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: 'var(--color-text-main)',
+            }}
+          >
+            Guyu Chat
+          </span>
         </Link>
 
-        {/* Desktop Navigation - hanya tampil di desktop */}
-        <div className="hidden md:flex gap-x-6 items-center">
-          <Link to="/login" className="text-lg font-semibold text-white hover:text-blue-500 transition-all duration-200 cursor-pointer relative group">
-            Login
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-200 group-hover:w-full"></span>
+        {/* Desktop: single outlined CTA — the silence IS the design */}
+        <div className="hidden md:flex items-center gap-[var(--space-lg)]">
+          <Link
+            to="/login"
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-sm)',
+              fontWeight: 500,
+              color: 'var(--color-text-muted)',
+              textDecoration: 'none',
+              transition: `color var(--dur-micro) var(--ease-out)`,
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--color-text-main)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-muted)'}
+          >
+            Masuk
           </Link>
           <Link
             to="/register"
-            className="text-lg font-semibold items-center py-2 px-8 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:bg-gray-800 transform transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl"
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-sm)',
+              fontWeight: 500,
+              color: 'var(--color-text-main)',
+              padding: 'var(--space-xs) var(--space-lg)',
+              border: '1px solid var(--color-ink)',
+              borderRadius: 'var(--radius-sm)',
+              textDecoration: 'none',
+              transition: `background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out)`,
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.backgroundColor = 'var(--color-ink)';
+              e.currentTarget.style.color = 'var(--color-paper)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = 'var(--color-text-main)';
+            }}
           >
-            Daftar sekarang
+            Mulai sekarang →
           </Link>
         </div>
 
-        {/* Mobile User Button - hanya tampil di mobile */}
-        <div className="md:hidden relative" ref={mobileMenuRef}>
+        {/* Mobile hamburger */}
+        <div className="md:hidden" ref={mobileMenuRef}>
           <button
-            onClick={handleButtonClick}
-            className={`relative overflow-hidden group
-              rounded-2xl p-3 
-             hover:bg-transparent
-              transition-all duration-200 cursor-pointer
-              shadow-md hover:shadow-lg
-              transform hover:scale-105
-              ${isButtonPressed ? 'scale-95' : ''}
-              ${isMobileMenuOpen ? 'bg-transparent border-blue-400 shadow-lg' : ''}
-            `}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            className="cursor-pointer"
+            style={{
+              padding: 'var(--space-xs)',
+              border: 'var(--rule-hairline)',
+              borderRadius: 'var(--radius-sm)',
+              backgroundColor: 'var(--color-bg-base)',
+              color: 'var(--color-text-main)',
+            }}
           >
-            {/* Ripple effect */}
-            <div className={`absolute inset-0 bg-blue-500 rounded-2xl opacity-0 transform scale-0 transition-all duration-300 ${isButtonPressed ? 'opacity-20 scale-100' : ''}`}></div>
-
-            {/* Button content */}
-            <div className="relative z-10 flex items-center space-x-2">
-              <User className={`h-5 w-5 text-slate-50 transition-all duration-200 ${isMobileMenuOpen ? 'text-blue-600' : ''}`} />
-              <ChevronDown className={`h-4 w-4 text-slate-50 transition-all duration-200 transform ${isMobileMenuOpen ? 'rotate-180 text-blue-600' : ''}`} />
-            </div>
-
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r from-blue-400/10 to-purple-400/10"></div>
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
-          {/* Mobile Menu Dropdown */}
-          <div
-            className={`absolute right-0 mt-5 w-48 bg-gray-800 text-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 transform origin-top-right z-50
-            ${isMobileMenuOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
-          `}
-          >
-            {/* Menu items with stagger animation */}
-            <div className="py-2">
-              <Link
-                to="/login"
-                className={`block w-full text-left px-6 py-3 text-white
-                ${isMobileMenuOpen ? 'animate-fadeInUp' : ''}
-              `}
-                style={{ animationDelay: '50ms' }}
+          {/* Mobile dropdown */}
+          {isMobileMenuOpen && (
+            <div
+              className="absolute top-full right-0 left-0"
+              style={{
+                backgroundColor: 'var(--color-bg-surface)',
+                borderBottom: 'var(--rule-hairline)',
+                padding: 'var(--space-lg) var(--page-gutter)',
+              }}
+            >
+              <nav
+                className="flex flex-col"
+                style={{ gap: 'var(--space-2xs)' }}
               >
-                Login
-                <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-top"></div>
-              </Link>
+                {NAV_LINKS.map((link) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: isActive ? 600 : 400,
+                        color: isActive ? 'var(--color-accent)' : 'var(--color-text-muted)',
+                        padding: 'var(--space-xs) var(--space-sm)',
+                        borderRadius: 'var(--radius-sm)',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </nav>
 
-              <Link
-                to="/register"
-                className={`block w-full text-left px-6 py-3 text-white
-                ${isMobileMenuOpen ? 'animate-fadeInUp' : ''}
-              `}
-                style={{ animationDelay: '100ms' }}
+              <div
+                className="grid grid-cols-2"
+                style={{
+                  gap: 'var(--space-sm)',
+                  marginTop: 'var(--space-lg)',
+                  paddingTop: 'var(--space-lg)',
+                  borderTop: 'var(--rule-hairline)',
+                }}
               >
-                Signup
-                <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-top"></div>
-              </Link>
+                <Link
+                  to="/login"
+                  className="text-center"
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: 500,
+                    color: 'var(--color-text-main)',
+                    padding: 'var(--space-sm)',
+                    border: 'var(--rule-hairline)',
+                    borderRadius: 'var(--radius-sm)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Masuk
+                </Link>
+                <Link
+                  to="/register"
+                  className="text-center"
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: 600,
+                    color: 'var(--color-paper)',
+                    backgroundColor: 'var(--color-ink)',
+                    padding: 'var(--space-sm)',
+                    borderRadius: 'var(--radius-sm)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Daftar
+                </Link>
+              </div>
             </div>
-
-            {/* Bottom accent */}
-            <div className="h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-          </div>
+          )}
         </div>
       </div>
 
-      {/* Custom CSS for animations */}
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeInUp {
-          animation: fadeInUp 0.3s ease-out forwards;
-        }
-      `}</style>
+      {/* Bottom hairline */}
+      <div style={{ borderBottom: 'var(--rule-hairline)' }} />
     </header>
   );
 }

@@ -1,135 +1,383 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { ShieldCheck, Lock, Zap, Cpu, ArrowRight, Target, Rocket } from 'lucide-react';
+
+/* Hallmark · genre: editorial · theme: Atelier
+ * About page with responsive clamp spacing and Atelier tokens
+ */
 
 function AboutPage() {
+  const VALUES = [
+    {
+      code: 'VAL_01',
+      title: 'Privasi Sebagai Hak Mutlak',
+      desc: 'Setiap percakapan dilindungi enkripsi client-side end-to-end. Kami percaya privasi data pengguna adalah hak mendasar dalam dunia digital.',
+      icon: Lock,
+    },
+    {
+      code: 'VAL_02',
+      title: 'Performa Tanpa Hambatan',
+      desc: 'Platform dirancang dengan arsitektur socket teroptimasi untuk memastikan pengiriman pesan berkecepatan tinggi tanpa hambatan antrean.',
+      icon: Zap,
+    },
+    {
+      code: 'VAL_03',
+      title: 'Transparansi Tanpa Log',
+      desc: 'Sistem tidak memproses, mengekstrak, atau menyimpan data teks obrolan pengguna di server. Zero-knowledge secara penuh.',
+      icon: ShieldCheck,
+    },
+  ];
+
   return (
     <>
       <SEO
-        title="Tentang Guyu Chat | Guyu Chat"
-        description="Kenali lebih dekat Guyu Chat: misi, visi, cerita di balik pengembangannya, dan tim yang berkomitmen menghadirkan platform chat aman, privat, dan bebas drama."
-        keywords="tentang guyu chat, about, misi, visi, tim, privasi, chat aman, chat privat, indonesia"
+        title="Tentang Guyu Chat — Protokol Obrolan Terenkripsi"
+        description="Pelajari visi, misi, dan prinsip arsitektur zero-knowledge di balik platform obrolan privat Guyu Chat."
+        keywords="tentang guyu chat, e2ee chat, arsitektur privasi, zero-knowledge, obrolan aman"
         type="article"
-        additionalMetaTags={[
-          { name: 'theme-color', content: '#1e293b' },
-          { name: 'application-name', content: 'Guyu Chat' },
-        ]}
       />
 
-      <div className="min-h-screen pt-20 w-full bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
-        {/* Main Content */}
-        <div className="px-6 py-12">
-          <div className="max-w-4xl mx-auto">
-            {/* Hero Section */}
-            <div className="text-center mb-16">
-              <h1 className="text-5xl font-black mb-6">
-                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Guyu Chat</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">Platform chat yang dibuat dengan satu misi: memberikan ruang komunikasi yang aman, privat, dan bebas drama untuk semua orang.</p>
+      <div
+        style={{
+          backgroundColor: 'var(--color-bg-base)',
+          color: 'var(--color-text-main)',
+          fontFamily: 'var(--font-body)',
+        }}
+        className="min-h-screen pb-[var(--space-2xl)]"
+      >
+        {/* Header */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="max-w-3xl space-y-[var(--space-sm)]">
+            <div
+              className="inline-flex items-center gap-2"
+              style={{
+                padding: 'var(--space-3xs) var(--space-xs)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+              }}
+            >
+              <Cpu className="w-3.5 h-3.5" />
+              <span>DOKUMENTASI ARSITEKTUR & MISI</span>
             </div>
 
-            {/* Story Section */}
-            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8 mb-12">
-              <h2 className="text-3xl font-bold mb-6">Cerita di Balik Guyu Chat</h2>
-              <div className="prose prose-gray prose-lg max-w-none">
-                <p className="text-gray-300 leading-relaxed mb-6">
-                  Guyu Chat lahir dari frustrasi sederhana: kenapa platform chat yang ada sekarang selalu ribet, lambat, atau bikin khawatir soal privasi? Kami percaya bahwa berkomunikasi harusnya mudah, cepat, dan yang paling penting -
-                  aman.
-                </p>
-                <p className="text-gray-300 leading-relaxed mb-6">Dimulai sebagai proyek eksperimen di akhir 2024, Guyu Chat berkembang menjadi platform yang mengedepankan:</p>
-                <ul className="text-gray-300 space-y-3">
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    <span>
-                      <strong>Privasi Mutlak:</strong> End-to-end encryption untuk semua percakapan
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-purple-400 mr-3">•</span>
-                    <span>
-                      <strong>Kecepatan Real-time:</strong> Tidak ada delay atau lag yang mengganggu
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-pink-400 mr-3">•</span>
-                    <span>
-                      <strong>Desain Modern:</strong> Interface yang bersih dan intuitif
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-3">•</span>
-                    <span>
-                      <strong>Bebas Drama:</strong> Fokus pada komunikasi yang sehat
-                    </span>
-                  </li>
-                </ul>
-              </div>
+            <h1
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
+              }}
+            >
+              Tentang <span style={{ color: 'var(--color-accent)' }}>Guyu Chat</span>
+            </h1>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(var(--text-sm), 2vw, var(--text-md))',
+                color: 'var(--color-text-muted)',
+                lineHeight: 1.7,
+              }}
+            >
+              Guyu Chat dikembangkan dengan prinsip utama menghadirkan infrastruktur komunikasi privat yang cepat, transparan, dan tidak bergantung pada pengolahan data terpusat.
+            </p>
+          </div>
+        </section>
+
+        {/* Narrative & Origins */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-[var(--space-lg)] items-start">
+            <div
+              className="lg:col-span-4"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+              }}
+            >
+              <div>// LATAR BELAKANG PROYEK</div>
+              <div style={{ color: 'var(--color-text-dim)' }}>Tujuan & Filosofi Pengembangan</div>
             </div>
 
-            {/* Mission & Vision */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <div className="text-4xl mb-4">🎯</div>
-                <h3 className="text-2xl font-bold mb-4 text-blue-300">Misi Kami</h3>
-                <p className="text-gray-300 leading-relaxed">Menciptakan platform komunikasi yang memungkinkan setiap orang untuk berkomunikasi dengan bebas, aman, dan nyaman tanpa khawatir tentang privasi atau gangguan teknis.</p>
-              </div>
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <div className="text-4xl mb-4">🚀</div>
-                <h3 className="text-2xl font-bold mb-4 text-purple-300">Visi Kami</h3>
-                <p className="text-gray-300 leading-relaxed">Menjadi platform chat pilihan utama untuk siapa saja yang mengutamakan privasi, kecepatan, dan kemudahan dalam berkomunikasi di era digital.</p>
-              </div>
-            </div>
-
-            {/* Team Section */}
-            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8 mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-center">Tim di Balik Guyu Chat</h2>
-              <p className="text-gray-300 text-center leading-relaxed max-w-2xl mx-auto mb-8">
-                Kami adalah tim kecil yang passionate tentang teknologi, privasi, dan komunikasi yang sehat. Setiap anggota tim berkontribusi dengan keahlian unik mereka.
+            <div className="lg:col-span-8 space-y-[var(--space-sm)] text-sm text-[var(--color-text-muted)] leading-relaxed">
+              <p
+                style={{
+                  fontSize: 'var(--text-base)',
+                  fontWeight: 500,
+                  color: 'var(--color-text-main)',
+                }}
+              >
+                Guyu Chat dimulai dari kebutuhan akan platform perpesanan web yang tidak melakukan pelacakan aktivitas pengguna maupun penyimpanan log pesan di server.
               </p>
-              <div className="text-center">
-                <p className="text-gray-400 text-sm">Made with ❤️ in Indonesia • Est. 2024</p>
-              </div>
-            </div>
-
-            {/* Values Section */}
-            <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-              <h2 className="text-3xl font-bold mb-8 text-center">Nilai-Nilai Kami</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🔒</span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-2 text-blue-300">Privacy First</h4>
-                  <p className="text-gray-400 text-sm">Data Anda adalah milik Anda. Tidak dijual, tidak dibagikan.</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">⚡</span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-2 text-purple-300">Speed & Reliability</h4>
-                  <p className="text-gray-400 text-sm">Komunikasi real-time tanpa hambatan teknis.</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🤝</span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-2 text-green-300">User-Centric</h4>
-                  <p className="text-gray-400 text-sm">Setiap fitur dirancang dengan user experience terbaik.</p>
-                </div>
-              </div>
+              <p>
+                Sebagian besar aplikasi obrolan modern memproses data pesan di server terpusat untuk keperluan analitik atau profil iklan. Guyu Chat mematahkan paradigma ini dengan memindahkan seluruh komputasi kunci enkripsi ke peramban (browser) pengguna secara langsung.
+              </p>
+              <p>
+                Kunci privat dibangkitkan secara independen pada perangkat pengirim dan penerima. Dengan demikian, peladen (server) hanya bertindak sebagai perantara paket biner terenkripsi (ciphertext) tanpa pernah memiliki kemampuan membaca isi obrolan.
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Footer CTA */}
-        <div className="px-6 py-12 border-t border-gray-700/50">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-4">Siap Bergabung?</h3>
-            <p className="text-gray-300 mb-6">Mulai chat yang aman dan bebas drama sekarang juga!</p>
-            <Link to="/login" className="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl font-bold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform">
-              Mulai Chat Sekarang
+        {/* Mission & Vision */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-md)]">
+            <div
+              style={{
+                padding: 'var(--space-lg)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+              }}
+              className="space-y-[var(--space-xs)]"
+            >
+              <div
+                style={{
+                  width: '2.25rem',
+                  height: '2.25rem',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--color-bg-base)',
+                  border: 'var(--rule-hairline)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--color-accent)',
+                }}
+              >
+                <Target className="w-5 h-5" />
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-accent)',
+                }}
+              >
+                01 / MISI UTAMA
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'var(--text-lg)',
+                  fontWeight: 600,
+                  color: 'var(--color-text-main)',
+                }}
+              >
+                Menciptakan Komunikasi Bebas Sadap
+              </h3>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--color-text-muted)',
+                  lineHeight: 1.6,
+                }}
+              >
+                Menyediakan saluran komunikasi real-time yang menjamin privasi penuh pengguna tanpa batasan langganan atau pengumpulan metadata pribadi.
+              </p>
+            </div>
+
+            <div
+              style={{
+                padding: 'var(--space-lg)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+              }}
+              className="space-y-[var(--space-xs)]"
+            >
+              <div
+                style={{
+                  width: '2.25rem',
+                  height: '2.25rem',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--color-bg-base)',
+                  border: 'var(--rule-hairline)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--color-accent)',
+                }}
+              >
+                <Rocket className="w-5 h-5" />
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-accent)',
+                }}
+              >
+                02 / VISI JANGKA PANJANG
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'var(--text-lg)',
+                  fontWeight: 600,
+                  color: 'var(--color-text-main)',
+                }}
+              >
+                Standar Baru Keamanan Web
+              </h3>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--color-text-muted)',
+                  lineHeight: 1.6,
+                }}
+              >
+                Menjadi rujukan platform web modern dalam menerapkan enkripsi zero-knowledge yang ringan, mudah diakses, dan transparan bagi publik.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Values */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+          className="space-y-[var(--space-lg)]"
+        >
+          <div>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+                marginBottom: 'var(--space-3xs)',
+              }}
+            >
+              PRINSIP UTAMA
+            </div>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.5rem, 3vw, var(--text-2xl))',
+                fontWeight: 600,
+              }}
+            >
+              Nilai Arsitektur Sistem
+            </h2>
+          </div>
+
+          <div className="space-y-[var(--space-xs)]">
+            {VALUES.map((val, idx) => (
+              <div
+                key={idx}
+                style={{
+                  padding: 'var(--space-md)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-bg-surface)',
+                  border: 'var(--rule-hairline)',
+                }}
+                className="grid grid-cols-1 md:grid-cols-12 gap-[var(--space-xs)] items-center"
+              >
+                <div className="md:col-span-2 lg:col-span-1">
+                  <div
+                    style={{
+                      width: '2.5rem',
+                      height: '2.5rem',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: 'var(--color-bg-base)',
+                      border: 'var(--rule-hairline)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--color-accent)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--text-xs)',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {val.code}
+                  </div>
+                </div>
+                <div className="md:col-span-10 lg:col-span-11 space-y-1">
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'var(--text-base)',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {val.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 'var(--text-sm)',
+                      color: 'var(--color-text-muted)',
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {val.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div
+            className="pt-[var(--space-lg)] flex flex-col sm:flex-row justify-between items-center gap-[var(--space-md)]"
+            style={{ borderTop: 'var(--rule-hairline)' }}
+          >
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 'var(--text-base)' }}>Siap Menggunakan Guyu Chat?</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-dim)' }}>
+                Gunakan langsung melalui peramban web Anda.
+              </div>
+            </div>
+            <Link
+              to="/login"
+              style={{
+                padding: 'var(--space-sm) var(--space-lg)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-ink)',
+                color: 'var(--color-paper)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+              className="inline-flex items-center gap-2 cursor-pointer"
+            >
+              <span>Mulai Chat Sekarang</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );

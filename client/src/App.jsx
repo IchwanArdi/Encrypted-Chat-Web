@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
-import IndexPage from './pages/IndexPage';
+import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -26,7 +26,7 @@ function App() {
           path="/"
           element={
             <MainLayout>
-              <IndexPage />
+              <LandingPage />
             </MainLayout>
           }
         />
@@ -81,18 +81,18 @@ function App() {
         <Route
           path="/privacy-policy"
           element={
-            <AuthLayout>
+            <MainLayout>
               <PrivacyPolicy />
-            </AuthLayout>
+            </MainLayout>
           }
         />
 
         <Route
           path="/terms-of-service"
           element={
-            <AuthLayout>
+            <MainLayout>
               <TermsOfService />
-            </AuthLayout>
+            </MainLayout>
           }
         />
 
@@ -104,9 +104,7 @@ function App() {
           path="/chat"
           element={
             <ProtectedRoute>
-              <AuthLayout>
-                <DashboardChatPage />
-              </AuthLayout>
+              <DashboardChatPage />
             </ProtectedRoute>
           }
         />

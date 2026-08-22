@@ -1,0 +1,98 @@
+/* Hallmark · genre: editorial · macrostructure: Split Studio · theme: Atelier
+ * tone: luxury-editorial · anchor hue: 35 (warm terracotta)
+ * nav: N9 Edge-aligned minimal · footer: Ft6 Letter close
+ * H2 hero knobs: ratio=7/5, right-side=proof-column, divider=negative-space
+ * F3 Tabular knobs: columns=2 (key/val), rule-density=every-row, numbers=tabular
+ * C3 Typographic link knobs: underline=solid, hover=thicken, arrow=→
+ * Ft6 Letter close knobs: signoff=roman, postscript=yes, width=60ch
+ * N9 Edge-aligned knobs: CTA-shape=outlined, wordmark=serif, padding-block=spacious
+ * pre-emit critique: P5 H4 E5 S5 R5 V5
+ */
+
+:root {
+  /* ─── Paper & Ink ─── */
+  --color-paper:       oklch(96.5% 0.008 35);
+  --color-paper-2:     oklch(93.5% 0.012 35);
+  --color-paper-3:     oklch(90%   0.014 35);
+
+  /* ─── Neutrals (warm-tinted toward anchor hue 35) ─── */
+  --color-rule:        oklch(84%   0.008 35);
+  --color-neutral:     oklch(60%   0.006 35);
+  --color-muted:       oklch(44%   0.008 30);
+  --color-ink:         oklch(18%   0.012 30);
+
+  /* ─── Accent — terracotta, <5% of viewport ─── */
+  --color-accent:      oklch(52%   0.16  30);
+  --color-accent-hover:oklch(44%   0.16  30);
+  --color-focus:       oklch(55%   0.18  30);
+
+  /* ─── Semantic surfaces ─── */
+  --color-bg-base:     var(--color-paper);
+  --color-bg-surface:  var(--color-paper-2);
+  --color-bg-elevated: var(--color-paper-3);
+
+  /* ─── Semantic text ─── */
+  --color-text-main:   var(--color-ink);
+  --color-text-muted:  var(--color-muted);
+  --color-text-dim:    var(--color-neutral);
+
+  /* ─── Semantic borders ─── */
+  --color-border-rule:    var(--color-rule);
+  --color-border-subtle:  oklch(84% 0.008 35 / 0.5);
+  --color-border-focus:   var(--color-focus);
+
+  /* ─── Typography ─── */
+  --font-display:  'Fraunces', Georgia, Cambria, 'Times New Roman', serif;
+  --font-body:     'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  /* ─── Type scale (major third 1.25) ─── */
+  --text-xs:       0.64rem;
+  --text-sm:       0.8rem;
+  --text-base:     1rem;
+  --text-md:       1.25rem;
+  --text-lg:       1.5625rem;
+  --text-xl:       1.9531rem;
+  --text-2xl:      2.4414rem;
+  --text-3xl:      3.0518rem;
+  --text-4xl:      3.8147rem;
+  --text-display:  clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-display-s:clamp(2rem, 3.5vw + 0.8rem, 3.5rem);
+
+  /* ─── Spacing (4pt base) ─── */
+  --space-3xs:  0.125rem;
+  --space-2xs:  0.25rem;
+  --space-xs:   0.5rem;
+  --space-sm:   0.75rem;
+  --space-md:   1rem;
+  --space-lg:   1.5rem;
+  --space-xl:   2.5rem;
+  --space-2xl:  4rem;
+  --space-3xl:  6rem;
+  --space-4xl:  9rem;
+
+  /* ─── Motion ─── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro:   120ms;
+  --dur-short:   220ms;
+  --dur-long:    420ms;
+
+  /* ─── Rules & Radius ─── */
+  --rule-hairline: 1px solid var(--color-rule);
+  --radius-sm:     2px;
+  --radius-md:     4px;
+
+  /* ─── Page gutter ─── */
+  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+
+  /* ─── Z-index scale ─── */
+  --z-base:     1;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-modal:    400;
+  --z-toast:    500;
+  --z-tooltip:  600;
+}

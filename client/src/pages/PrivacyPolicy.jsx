@@ -1,196 +1,342 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { ShieldCheck, Check, X } from 'lucide-react';
+
+/* Hallmark · genre: editorial · theme: Atelier
+ * Privacy Policy page with responsive clamp spacing and Atelier tokens
+ */
 
 function PrivacyPolicy() {
   return (
     <>
       <SEO
-        title="Privacy Policy | Guyu Chat"
-        description="Baca kebijakan privasi Guyu Chat: bagaimana kami melindungi data, enkripsi end-to-end, hak pengguna, serta komitmen kami terhadap keamanan dan transparansi."
-        keywords="privacy policy, kebijakan privasi, keamanan data, enkripsi, end-to-end encryption, privasi pengguna, guyu chat, keamanan, transparansi"
+        title="Kebijakan Privasi - Guyu Chat"
+        description="Dokumentasi resmi mengenai perlindungan data pribadi dan enkripsi zero-knowledge di platform Guyu Chat."
+        keywords="kebijakan privasi, privacy policy, guyu chat, enkripsi e2ee, zero-knowledge, perlindungan data"
         type="article"
-        additionalMetaTags={[
-          { name: 'theme-color', content: '#1e293b' },
-          { name: 'application-name', content: 'Guyu Chat' },
-        ]}
       />
 
-      <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
-        {/* Main Content */}
-        <div className="px-6 py-12">
-          <div className="max-w-4xl mx-auto">
-            {/* Hero Section */}
-            <div className="text-center mb-16">
-              <h1 className="text-5xl font-black mb-6">
-                Privacy <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500">Policy</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">Transparansi penuh tentang bagaimana kami melindungi data dan privasi Anda. Karena privasi adalah hak, bukan privilege.</p>
-              <p className="text-sm text-gray-400 mt-4">Last updated: January 2025</p>
+      <div
+        style={{
+          backgroundColor: 'var(--color-bg-base)',
+          color: 'var(--color-text-main)',
+          fontFamily: 'var(--font-body)',
+        }}
+        className="min-h-screen pb-[var(--space-2xl)]"
+      >
+        {/* Header */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="max-w-3xl space-y-[var(--space-sm)]">
+            <div
+              className="inline-flex items-center gap-2"
+              style={{
+                padding: 'var(--space-3xs) var(--space-xs)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+              }}
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>DOKUMEN PRIVASI & TRANSPARANSI DATA</span>
             </div>
 
-            {/* Quick Summary */}
-            <div className="bg-green-500/10 border border-green-500/30 rounded-3xl p-8 mb-12">
-              <h2 className="text-2xl font-bold mb-4 text-green-300">Ringkasan Singkat</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-bold text-white mb-2">✅ Yang Kami LAKUKAN:</h3>
-                  <ul className="text-gray-300 space-y-1 text-sm">
-                    <li>• Enkripsi end-to-end semua pesan</li>
-                    <li>• Simpan data minimal yang diperlukan</li>
-                    <li>• Transparan tentang praktik data</li>
-                    <li>• Berikan kontrol penuh kepada user</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-bold text-white mb-2">❌ Yang TIDAK Kami Lakukan:</h3>
-                  <ul className="text-gray-300 space-y-1 text-sm">
-                    <li>• Jual data pribadi Anda</li>
-                    <li>• Baca pesan pribadi Anda</li>
-                    <li>• Track aktivitas di luar platform</li>
-                    <li>• Bagikan info tanpa izin</li>
-                  </ul>
-                </div>
+            <h1
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
+              }}
+            >
+              Kebijakan <span style={{ color: 'var(--color-accent)' }}>Privasi</span>
+            </h1>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(var(--text-sm), 2vw, var(--text-md))',
+                color: 'var(--color-text-muted)',
+                lineHeight: 1.7,
+              }}
+            >
+              Transparansi penuh mengenai pemrosesan data, enkripsi lokal, serta komitmen kami terhadap arsitektur zero-knowledge.
+            </p>
+
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-text-dim)',
+              }}
+            >
+              Terakhir Diperbarui: Januari 2026 • Versi Protokol: E2EE-v2
+            </div>
+          </div>
+        </section>
+
+        {/* Matrix Comparison Section */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-md)]">
+            
+            {/* Allowed Data Practices */}
+            <div
+              style={{
+                padding: 'var(--space-lg)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+              }}
+              className="space-y-[var(--space-xs)]"
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'oklch(60% 0.15 140)',
+                }}
+                className="flex items-center gap-2 font-bold"
+              >
+                <Check className="w-4 h-4" />
+                <span>PRAKTIK DITERAPKAN (YANG KAMI LAKUKAN)</span>
               </div>
+              <ul className="space-y-2 text-xs font-mono text-[var(--color-text-muted)]">
+                <li className="flex items-start gap-2">
+                  <span style={{ color: 'oklch(60% 0.15 140)' }}>•</span>
+                  <span>Enkripsi AES-256-GCM pada tingkat perangkat sebelum pesan dikirim.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{ color: 'oklch(60% 0.15 140)' }}>•</span>
+                  <span>Penyimpanan data minimal hanya untuk otentikasi akun dasar.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{ color: 'oklch(60% 0.15 140)' }}>•</span>
+                  <span>Pertukaran kunci privat ECDH langsung antar-browser tanpa perantara.</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Detailed Sections */}
-            <div className="space-y-8">
-              {/* Data Collection */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-blue-300">Data yang Kami Kumpulkan</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Informasi Akun</h3>
-                    <p className="text-gray-300">Email, nama, dan password terenkripsi untuk membuat dan mengelola akun Anda.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Data Komunikasi</h3>
-                    <p className="text-gray-300">Metadata pesan (waktu, pengirim/penerima) untuk fungsionalitas chat. Konten pesan dienkripsi end-to-end.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Data Teknis</h3>
-                    <p className="text-gray-300">Informasi perangkat dan koneksi minimal untuk optimalisasi performa dan keamanan.</p>
-                  </div>
-                </div>
+            {/* Prohibited Data Practices */}
+            <div
+              style={{
+                padding: 'var(--space-lg)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+              }}
+              className="space-y-[var(--space-xs)]"
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-accent)',
+                }}
+                className="flex items-center gap-2 font-bold"
+              >
+                <X className="w-4 h-4" />
+                <span>PRAKTIK DILARANG (YANG TIDAK KAMI LAKUKAN)</span>
               </div>
+              <ul className="space-y-2 text-xs font-mono text-[var(--color-text-muted)]">
+                <li className="flex items-start gap-2">
+                  <span style={{ color: 'var(--color-accent)' }}>•</span>
+                  <span>Menjual, menyewakan, atau membagikan data pengguna ke pihak ketiga.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{ color: 'var(--color-accent)' }}>•</span>
+                  <span>Membaca atau merekam konten percakapan plaintext di peladen.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{ color: 'var(--color-accent)' }}>•</span>
+                  <span>Melacak aktivitas jelajah web pengguna di luar aplikasi Guyu Chat.</span>
+                </li>
+              </ul>
+            </div>
 
-              {/* How We Use Data */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-purple-300">Bagaimana Kami Menggunakan Data</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Operasional Platform</h3>
-                    <ul className="text-gray-300 space-y-1 text-sm">
-                      <li>• Memfasilitasi pengiriman pesan</li>
-                      <li>• Manajemen akun pengguna</li>
-                      <li>• Pemeliharaan keamanan sistem</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">Peningkatan Layanan</h3>
-                    <ul className="text-gray-300 space-y-1 text-sm">
-                      <li>• Analisis performa (tanpa konten pesan)</li>
-                      <li>• Debugging dan perbaikan bug</li>
-                      <li>• Pengembangan fitur baru</li>
-                    </ul>
-                  </div>
-                </div>
+          </div>
+        </section>
+
+        {/* Detailed Sections */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+          className="space-y-[var(--space-lg)]"
+        >
+          {/* Data Collection Details */}
+          <div className="space-y-[var(--space-xs)]">
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-lg)',
+                fontWeight: 600,
+                borderLeft: '2px solid var(--color-accent)',
+                paddingLeft: 'var(--space-xs)',
+              }}
+            >
+              1. Informasi yang Dikumpulkan
+            </h2>
+            <div
+              style={{
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-md)',
+              }}
+              className="space-y-[var(--space-xs)] text-sm text-[var(--color-text-muted)] leading-relaxed"
+            >
+              <div>
+                <strong style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-main)' }} className="block mb-1">
+                  INFORMASI AKUN OPERASIONAL
+                </strong>
+                Alamat email terverifikasi dan hash kata sandi terenkripsi yang digunakan khusus untuk keperluan otentikasi sesi login.
               </div>
-
-              {/* Data Security */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-yellow-300">Keamanan Data</h2>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 flex items-center justify-center mt-1">
-                      <span className="text-green-400 text-sm">🔐</span>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white mb-1">End-to-End Encryption</h3>
-                      <p className="text-gray-300 text-sm">Semua pesan dienkripsi dengan algoritma AES-256. Bahkan kami tidak bisa membaca pesan Anda.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8  flex items-center justify-center mt-1">
-                      <span className="text-blue-400 text-sm">🛡️</span>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white mb-1">Secure Infrastructure</h3>
-                      <p className="text-gray-300 text-sm">Server dilindungi dengan firewall, SSL/TLS, dan monitoring keamanan 24/7.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 flex items-center justify-center mt-1">
-                      <span className="text-purple-400 text-sm">🔄</span>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white mb-1">Regular Security Audits</h3>
-                      <p className="text-gray-300 text-sm">Audit keamanan berkala untuk memastikan sistem selalu terlindungi dari ancaman terbaru.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Your Rights */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-pink-300">Hak-Hak Anda</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-green-400">✅</span>
-                      <span className="text-white font-semibold">Akses Data</span>
-                    </div>
-                    <p className="text-gray-300 text-sm ml-6">Minta salinan semua data pribadi yang kami miliki tentang Anda.</p>
-
-                    <div className="flex items-center space-x-2">
-                      <span className="text-green-400">✅</span>
-                      <span className="text-white font-semibold">Koreksi Data</span>
-                    </div>
-                    <p className="text-gray-300 text-sm ml-6">Perbaiki atau update informasi yang tidak akurat.</p>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-green-400">✅</span>
-                      <span className="text-white font-semibold">Hapus Akun</span>
-                    </div>
-                    <p className="text-gray-300 text-sm ml-6">Hapus akun dan semua data terkait kapan saja.</p>
-
-                    <div className="flex items-center space-x-2">
-                      <span className="text-green-400">✅</span>
-                      <span className="text-white font-semibold">Portabilitas</span>
-                    </div>
-                    <p className="text-gray-300 text-sm ml-6">Export data Anda dalam format yang dapat dibaca.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact & Updates */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-4 text-cyan-300">Kontak & Update</h2>
-                <div className="space-y-4">
-                  <p className="text-gray-300">
-                    Punya pertanyaan tentang privasi atau ingin menggunakan hak-hak Anda? Hubungi kami di{' '}
-                    <Link to="/contact" className="text-cyan-400 hover:text-cyan-300 underline">
-                      halaman contact
-                    </Link>
-                    .
-                  </p>
-                  <p className="text-gray-300">Kami akan memberitahu semua perubahan signifikan pada kebijakan privasi ini melalui email dan notifikasi di platform minimal 30 hari sebelumnya.</p>
-                  <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4">
-                    <p className="text-cyan-300 font-semibold text-sm">💡 Tip: Bookmark halaman ini untuk update terbaru tentang kebijakan privasi kami.</p>
-                  </div>
-                </div>
+              <div>
+                <strong style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-main)' }} className="block mb-1">
+                  METADATA KONEKSI TEMPORER
+                </strong>
+                Informasi dasar berupa IP address dan user agent saat koneksi WebSocket dibuat untuk mendeteksi ancaman bot. Metadata ini dibersihkan secara berkala.
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Footer */}
-        <div className="px-6 py-8 border-t border-gray-700/50">
-          <div className="max-w-4xl mx-auto text-center text-gray-400">
-            <p>© 2025 Guyu Chat. Privasi Anda adalah prioritas utama kami.</p>
+          {/* Encryption Architecture */}
+          <div className="space-y-[var(--space-xs)]">
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-lg)',
+                fontWeight: 600,
+                borderLeft: '2px solid var(--color-accent)',
+                paddingLeft: 'var(--space-xs)',
+              }}
+            >
+              2. Keamanan Enkripsi Client-Side
+            </h2>
+            <div
+              style={{
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-md)',
+              }}
+              className="space-y-2 text-sm text-[var(--color-text-muted)] leading-relaxed"
+            >
+              <p>
+                Seluruh percakapan privat menggunakan algoritma enkripsi simetris <code className="font-mono text-xs text-[var(--color-accent)]">AES-256-GCM</code>. Kunci sesi dibangkitkan melalui kurva eliptis <code className="font-mono text-xs text-[var(--color-accent)]">ECDH P-256</code> pada Web Crypto API browser Anda.
+              </p>
+              <p>
+                Sistem tidak menyimpan kunci privat Anda di server. Jika terjadi peretasan pada peladen, peretas tetap tidak memiliki kemampuan teknis untuk mendeskripsi pesan Anda.
+              </p>
+            </div>
           </div>
-        </div>
+
+          {/* User Rights */}
+          <div className="space-y-[var(--space-xs)]">
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-lg)',
+                fontWeight: 600,
+                borderLeft: '2px solid var(--color-accent)',
+                paddingLeft: 'var(--space-xs)',
+              }}
+            >
+              3. Hak-Hak Pengguna
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-xs)]">
+              <div
+                style={{
+                  padding: 'var(--space-md)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-bg-surface)',
+                  border: 'var(--rule-hairline)',
+                }}
+                className="space-y-1"
+              >
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--color-accent)' }}>
+                  HAK 01: HAPUS AKUN & DATA
+                </div>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+                  Pengguna berhak mengajukan penghapusan akun permanen beserta seluruh identitas yang tersimpan di basis data kapan saja.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  padding: 'var(--space-md)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-bg-surface)',
+                  border: 'var(--rule-hairline)',
+                }}
+                className="space-y-1"
+              >
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--color-accent)' }}>
+                  HAK 02: EKSPOR DATA OPERASIONAL
+                </div>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+                  Pengguna dapat meminta salinan data profil dan riwayat otentikasi akun yang tersimpan secara terstruktur.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Section */}
+          <div
+            style={{
+              padding: 'var(--space-md)',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: 'var(--color-bg-surface)',
+              border: 'var(--rule-hairline)',
+            }}
+            className="flex flex-col sm:flex-row justify-between items-center gap-[var(--space-sm)]"
+          >
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 'var(--text-sm)', color: 'var(--color-text-main)' }}>
+                Pertanyaan Terkait Kebijakan Privasi?
+              </div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-dim)' }}>
+                Hubungi Petugas Perlindungan Data kami untuk pertanyaan resmi.
+              </div>
+            </div>
+
+            <Link
+              to="/contact"
+              style={{
+                padding: 'var(--space-xs) var(--space-sm)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-ink)',
+                color: 'var(--color-paper)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+              className="cursor-pointer shrink-0"
+            >
+              Hubungi Support
+            </Link>
+          </div>
+        </section>
       </div>
     </>
   );

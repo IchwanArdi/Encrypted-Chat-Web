@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import SEO from '../components/SEO';
+import { Mail, MessageSquare, Globe, Send, CheckCircle2 } from 'lucide-react';
+
+/* Hallmark · genre: editorial · theme: Atelier
+ * Contact page with responsive clamp spacing and Atelier tokens
+ */
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -23,178 +28,386 @@ function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 2000);
+    }, 1200);
   };
 
   return (
     <>
       <SEO
-        title="Contact Us | Guyu Chat"
-        description="Hubungi Guyu Chat untuk pertanyaan, saran, atau bantuan. Tim support kami siap melayani 24/7 melalui email, WhatsApp, atau website resmi."
-        keywords="contact guyu chat, hubungi guyu chat, bantuan guyu chat, support guyu chat, saran, pertanyaan, customer service"
+        title="Hubungi Kami - Guyu Chat"
+        description="Saluran komunikasi dan dukungan pengguna Guyu Chat. Kirimkan pesan, masukan, atau laporan teknis Anda."
+        keywords="hubungi kami, contact, dukungan pengguna, support guyu chat, kontak"
         type="website"
-        additionalMetaTags={[
-          { name: 'theme-color', content: '#1e293b' },
-          { name: 'application-name', content: 'Guyu Chat' },
-        ]}
       />
 
-      <div className="min-h-screen pt-20 w-full bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
-        {/* Main Content */}
-        <div className="px-6 py-12">
-          <div className="max-w-4xl mx-auto">
-            {/* Hero Section */}
-            <div className="text-center mb-16">
-              <h1 className="text-5xl font-black mb-6">
-                Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Us</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">Ada pertanyaan, saran, atau butuh bantuan? Kami di sini untuk membantu! Tim support kami siap melayani 24/7.</p>
+      <div
+        style={{
+          backgroundColor: 'var(--color-bg-base)',
+          color: 'var(--color-text-main)',
+          fontFamily: 'var(--font-body)',
+        }}
+        className="min-h-screen pb-[var(--space-2xl)]"
+      >
+        {/* Header */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            borderBottom: 'var(--rule-hairline)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="max-w-3xl space-y-[var(--space-sm)]">
+            <div
+              className="inline-flex items-center gap-2"
+              style={{
+                padding: 'var(--space-3xs) var(--space-xs)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-accent)',
+              }}
+            >
+              <Mail className="w-3.5 h-3.5" />
+              <span>SALURAN KOMUNIKASI & SUPPORT</span>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-8">
-                <h2 className="text-2xl font-bold mb-6 text-orange-300">Kirim Pesan</h2>
+            <h1
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
+              }}
+            >
+              Hubungi <span style={{ color: 'var(--color-accent)' }}>Tim Kami</span>
+            </h1>
 
-                {submitted ? (
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl">✅</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-green-300 mb-2">Pesan Terkirim!</h3>
-                    <p className="text-gray-300">Terima kasih! Kami akan membalas dalam 24 jam.</p>
-                    <button onClick={() => setSubmitted(false)} className="mt-4 text-orange-400 hover:text-orange-300 underline">
-                      Kirim pesan lain
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-3">
-                          Nama
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          required
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 backdrop-blur-sm transition-all duration-300"
-                          placeholder="Nama Anda"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-3">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          required
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 backdrop-blur-sm transition-all duration-300"
-                          placeholder="email@example.com"
-                        />
-                      </div>
-                    </div>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(var(--text-sm), 2vw, var(--text-md))',
+                color: 'var(--color-text-muted)',
+                lineHeight: 1.7,
+              }}
+            >
+              Kirimkan pertanyaan, masukan teknis, atau kendala penggunaan melalui formulir dukungan berikut.
+            </p>
+          </div>
+        </section>
 
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-semibold text-gray-300 mb-3">
-                        Subjek
-                      </label>
-                      <select
-                        id="subject"
-                        name="subject"
-                        required
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 backdrop-blur-sm transition-all duration-300"
+        {/* Main Content Grid */}
+        <section
+          style={{
+            padding: 'clamp(var(--space-lg), 4vw, var(--space-2xl)) var(--page-gutter)',
+            maxWidth: '80rem',
+            marginInline: 'auto',
+          }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-[var(--space-lg)] items-start">
+            
+            {/* Form Column */}
+            <div
+              className="lg:col-span-7 space-y-[var(--space-md)]"
+              style={{
+                backgroundColor: 'var(--color-bg-surface)',
+                border: 'var(--rule-hairline)',
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-lg)',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'var(--text-xs)',
+                  color: 'var(--color-accent)',
+                  textTransform: 'uppercase',
+                }}
+              >
+                // FORMULIR DUKUNGAN TEKNIS
+              </div>
+
+              {submitted ? (
+                <div
+                  style={{
+                    padding: 'var(--space-lg)',
+                    borderRadius: 'var(--radius-sm)',
+                    backgroundColor: 'oklch(95% 0.05 140)',
+                    border: '1px solid oklch(50% 0.15 140)',
+                    textAlign: 'center',
+                  }}
+                  className="space-y-[var(--space-xs)]"
+                >
+                  <CheckCircle2 className="w-10 h-10 mx-auto text-[oklch(40%_0.15_140)]" />
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'var(--text-lg)',
+                      fontWeight: 600,
+                      color: 'oklch(25% 0.15 140)',
+                    }}
+                  >
+                    Pesan Berhasil Terkirim!
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--text-xs)',
+                      color: 'oklch(35% 0.1 140)',
+                    }}
+                  >
+                    Terima kasih atas masukan Anda. Tim dukungan teknis akan meninjau pesan Anda secepatnya.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="cursor-pointer mt-2"
+                    style={{
+                      padding: 'var(--space-xs) var(--space-sm)',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: 'var(--color-bg-base)',
+                      border: 'var(--rule-hairline)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--text-xs)',
+                      color: 'var(--color-text-main)',
+                    }}
+                  >
+                    Kirim Pesan Lain
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-[var(--space-sm)]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-xs)]">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="name"
+                        style={{
+                          display: 'block',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: 'var(--text-xs)',
+                          color: 'var(--color-text-muted)',
+                        }}
                       >
-                        <option value="">Pilih Subjek</option>
-                        <option value="Pertanyaan">Pertanyaan</option>
-                        <option value="Saran">Saran</option>
-                        <option value="Bantuan">Bantuan</option>
-                        <option value="Lainnya">Lainnya</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-3">
-                        Pesan
+                        NAMA LENGKAP:
                       </label>
-                      <textarea
-                        id="message"
-                        name="message"
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
                         required
-                        value={formData.message}
+                        value={formData.name}
                         onChange={handleInputChange}
-                        rows={5}
-                        className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 backdrop-blur-sm transition-all duration-300 resize-none"
-                        placeholder="Tulis pesan Anda di sini..."
+                        placeholder="Budi Santoso"
+                        style={{
+                          width: '100%',
+                          backgroundColor: 'var(--color-bg-base)',
+                          border: 'var(--rule-hairline)',
+                          borderRadius: 'var(--radius-sm)',
+                          padding: 'var(--space-xs) var(--space-sm)',
+                          fontSize: 'var(--text-sm)',
+                          fontFamily: 'var(--font-body)',
+                          color: 'var(--color-text-main)',
+                          outline: 'none',
+                        }}
+                        onFocus={(e) => (e.target.style.borderColor = 'var(--color-border-focus)')}
+                        onBlur={(e) => (e.target.style.borderColor = 'var(--color-rule)')}
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className={`w-full py-3 rounded-xl font-bold text-lg bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 transition-all duration-300 text-white shadow-lg shadow-orange-500/20 ${
-                        isSubmitting ? 'opacity-60 cursor-not-allowed' : ''
-                      }`}
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="email"
+                        style={{
+                          display: 'block',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: 'var(--text-xs)',
+                          color: 'var(--color-text-muted)',
+                        }}
+                      >
+                        ALAMAT EMAIL:
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="budi@domain.com"
+                        style={{
+                          width: '100%',
+                          backgroundColor: 'var(--color-bg-base)',
+                          border: 'var(--rule-hairline)',
+                          borderRadius: 'var(--radius-sm)',
+                          padding: 'var(--space-xs) var(--space-sm)',
+                          fontSize: 'var(--text-sm)',
+                          fontFamily: 'var(--font-body)',
+                          color: 'var(--color-text-main)',
+                          outline: 'none',
+                        }}
+                        onFocus={(e) => (e.target.style.borderColor = 'var(--color-border-focus)')}
+                        onBlur={(e) => (e.target.style.borderColor = 'var(--color-rule)')}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label
+                      htmlFor="subject"
+                      style={{
+                        display: 'block',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 'var(--text-xs)',
+                        color: 'var(--color-text-muted)',
+                      }}
                     >
-                      {isSubmitting ? 'Mengirim...' : 'Kirim Pesan'}
-                    </button>
-                  </form>
-                )}
+                      KATEGORI SUBJEK:
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      style={{
+                        width: '100%',
+                        backgroundColor: 'var(--color-bg-base)',
+                        border: 'var(--rule-hairline)',
+                        borderRadius: 'var(--radius-sm)',
+                        padding: 'var(--space-xs) var(--space-sm)',
+                        fontSize: 'var(--text-sm)',
+                        fontFamily: 'var(--font-mono)',
+                        color: 'var(--color-text-main)',
+                        outline: 'none',
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = 'var(--color-border-focus)')}
+                      onBlur={(e) => (e.target.style.borderColor = 'var(--color-rule)')}
+                    >
+                      <option value="">-- Pilih Kategori --</option>
+                      <option value="Pertanyaan Teknis">Pertanyaan Teknis</option>
+                      <option value="Laporan Bug">Laporan Bug / Kendala</option>
+                      <option value="Masukan Fitur">Masukan Fitur</option>
+                      <option value="Keamanan & Privasi">Keamanan & Privasi</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label
+                      htmlFor="message"
+                      style={{
+                        display: 'block',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 'var(--text-xs)',
+                        color: 'var(--color-text-muted)',
+                      }}
+                    >
+                      ISI PESAN / DETAIL KENDALA:
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      required
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Jelaskan detail pertanyaan atau kendala Anda di sini..."
+                      style={{
+                        width: '100%',
+                        backgroundColor: 'var(--color-bg-base)',
+                        border: 'var(--rule-hairline)',
+                        borderRadius: 'var(--radius-sm)',
+                        padding: 'var(--space-xs) var(--space-sm)',
+                        fontSize: 'var(--text-sm)',
+                        fontFamily: 'var(--font-body)',
+                        color: 'var(--color-text-main)',
+                        outline: 'none',
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = 'var(--color-border-focus)')}
+                      onBlur={(e) => (e.target.style.borderColor = 'var(--color-rule)')}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full cursor-pointer flex items-center justify-center gap-2"
+                    style={{
+                      padding: 'var(--space-sm)',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: 'var(--color-ink)',
+                      color: 'var(--color-paper)',
+                      fontFamily: 'var(--font-body)',
+                      fontWeight: 600,
+                      fontSize: 'var(--text-sm)',
+                      border: 'none',
+                      opacity: isSubmitting ? 0.6 : 1,
+                    }}
+                  >
+                    {isSubmitting ? (
+                      <span>Mengirim Pesan...</span>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Kirim Pesan Dukungan</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Info Cards Column */}
+            <div className="lg:col-span-5 space-y-[var(--space-md)]">
+              <div
+                style={{
+                  padding: 'var(--space-lg)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-bg-surface)',
+                  border: 'var(--rule-hairline)',
+                }}
+                className="space-y-[var(--space-xs)]"
+              >
+                <div className="flex items-center gap-2 text-[var(--color-accent)] font-mono text-xs">
+                  <MessageSquare className="w-4 h-4" />
+                  <span>RESPONS TEKNIS PRESISI</span>
+                </div>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-md)', fontWeight: 600 }}>
+                  Waktu Operasional Support
+                </h3>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+                  Laporan teknis dan pesan yang dikirimkan akan diproses oleh pengembang dalam waktu maksimal 24 jam kerja.
+                </p>
               </div>
 
-              {/* Contact Info */}
-              <div className="flex flex-col justify-center items-start space-y-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center">
-                    <span className="text-2xl">📧</span>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-orange-300">Email</p>
-                    <a href="mailto:support@guyuchat.com" className="text-gray-200 hover:text-orange-400 transition-colors">
-                      support@guyuchat.com
-                    </a>
-                  </div>
+              <div
+                style={{
+                  padding: 'var(--space-lg)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-bg-surface)',
+                  border: 'var(--rule-hairline)',
+                }}
+                className="space-y-[var(--space-xs)]"
+              >
+                <div className="flex items-center gap-2 text-[var(--color-accent)] font-mono text-xs">
+                  <Globe className="w-4 h-4" />
+                  <span>JALUR KOMUNIKASI</span>
                 </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center">
-                    <span className="text-2xl">📱</span>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-orange-300">WhatsApp</p>
-                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-orange-400 transition-colors">
-                      +62 812-3456-7890
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center">
-                    <span className="text-2xl">🌐</span>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-orange-300">Website</p>
-                    <a href="https://guyuchat.com" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-orange-400 transition-colors">
-                      www.guyuchat.com
-                    </a>
-                  </div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-dim)' }} className="space-y-2">
+                  <div>• Email Direct: support@guyuchat.com</div>
+                  <div>• Status Server: 99.9% Uptime WebSocket</div>
+                  <div>• Lokasi Node: Web Crypto Native Node</div>
                 </div>
               </div>
             </div>
+
           </div>
-        </div>
+        </section>
       </div>
     </>
   );
