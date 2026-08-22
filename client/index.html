@@ -2,17 +2,64 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/logo.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Guyu Chat — Protokol Obrolan Terenkripsi & Privasi Zero-Knowledge</title>
+    <meta name="title" content="Guyu Chat — Protokol Obrolan Terenkripsi & Privasi Zero-Knowledge" />
+    <meta name="description" content="Guyu Chat adalah platform obrolan privat dengan enkripsi end-to-end (AES-256-GCM + ECDH) di browser. Tanpa log, tanpa pelacakan data, 100% aman dan cepat." />
+    <meta name="keywords" content="guyu chat, chat terenkripsi, end to end encryption, e2ee, e2ee web chat, zero knowledge chat, percakapan privat, obrolan aman indonesia, websocket chat" />
+    <meta name="author" content="Tim Guyu Chat" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1a1816" />
+    <link rel="canonical" href="https://guyuchat.vercel.app/" />
 
-    <!-- Fonts: Fraunces (Atelier Display) + IBM Plex Sans (Body) + JetBrains Mono (Outlier/Technical) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Favicon & Touch Icon -->
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <link rel="apple-touch-icon" href="/logo.webp" />
 
-    <!-- Title default -->
-    <title>Guyu Chat</title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://guyuchat.vercel.app/" />
+    <meta property="og:title" content="Guyu Chat — Obrolan Terenkripsi End-to-End di Browser" />
+    <meta property="og:description" content="Komunikasi privat berkecepatan tinggi dengan enkripsi AES-256-GCM langsung dari browser Anda. Zero-knowledge, tanpa penyimpanan log." />
+    <meta property="og:image" content="https://guyuchat.vercel.app/logo.webp" />
+    <meta property="og:site_name" content="Guyu Chat" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://guyuchat.vercel.app/" />
+    <meta name="twitter:title" content="Guyu Chat — Obrolan Terenkripsi End-to-End" />
+    <meta name="twitter:description" content="Komunikasi privat dengan enkripsi AES-256-GCM langsung dari browser Anda." />
+    <meta name="twitter:image" content="https://guyuchat.vercel.app/logo.webp" />
+
+    <!-- Performance & Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Guyu Chat",
+        "url": "https://guyuchat.vercel.app",
+        "description": "Platform obrolan terenkripsi end-to-end berbasis web dengan arsitektur zero-knowledge.",
+        "applicationCategory": "CommunicationApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "IDR"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Guyu Chat Team"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

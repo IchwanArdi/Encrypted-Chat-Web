@@ -1,0 +1,17 @@
+# robots.txt for Guyu Chat
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /help
+Allow: /contact
+Allow: /privacy-policy
+Allow: /terms-of-service
+Allow: /login
+Allow: /register
+
+# Disallow private/authenticated dynamic routes
+Disallow: /chat
+Disallow: /auth/
+Disallow: /account-deletion-form
+
+Sitemap: https://guyuchat.vercel.app/sitemap.xml
